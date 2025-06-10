@@ -16,9 +16,6 @@ import imgSuivez from "@/public/suivez-img.png";
 import logoWhite from "@/public/Logo-White.png";
 import { prisma } from "@/lib/prisma";
 
-const test = await prisma.TestModel.findMany();
-
-console.log("*************************** " + JSON.stringify(test, null, 2));
 
 export default function Home() {
   return (
