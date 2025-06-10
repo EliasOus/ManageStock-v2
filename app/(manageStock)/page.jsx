@@ -14,7 +14,11 @@ import imgChart from "@/public/chart-img.png";
 import imgIdentifier from "@/public/identifiez-img.jpg";
 import imgSuivez from "@/public/suivez-img.png";
 import logoWhite from "@/public/Logo-White.png";
-import { redirect } from "next/dist/server/api-utils";
+import { prisma } from "@/lib/prisma";
+
+const test = await prisma.TestModel.findMany();
+
+console.log("*************************** " + JSON.stringify(test, null, 2));
 
 export default function Home() {
   return (
@@ -41,7 +45,7 @@ export default function Home() {
           {/* </div> */}
         </div>
       </div>
-      <div className={styles.sectionEntreprise} >
+      <div className={styles.sectionEntreprise}>
         <SectionEntreprises />
       </div>
       <div className={styles.sectionAventage}>
