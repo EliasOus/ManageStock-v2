@@ -7,8 +7,7 @@ import { prisma } from "@/lib/prisma";
 
 export default async function Recherche() {
   const produits = await prisma.produit.findMany();
-  console.log("******");
-  console.log(JSON.stringify(produits, null, 2));
+
   return (
     <>
       <div className={styles.contenaire}>
