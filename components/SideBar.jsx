@@ -23,7 +23,6 @@ import { FiUsers } from "react-icons/fi";
 export default function SideBar() {
   // Récupération du chemin actuel pour déterminer l'élément actif
   const url = usePathname();
-  console.log("pathName : " + url);
 
   return (
     <div className={style.sideBar}>

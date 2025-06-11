@@ -63,6 +63,7 @@ export default function Inventaire() {
       )}
       <div>
        <InfoBloc
+       dataType={"commande"}
         defaultTitle={"Inventaire"}
         defaultHeaders={[
          "Upe/Sku",

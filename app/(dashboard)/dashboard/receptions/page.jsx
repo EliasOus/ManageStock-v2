@@ -14,17 +14,18 @@ export default function receptions() {
   return (
     <>
       <h1 className={style.titre}>Gestion des Réceptions</h1>
-      
+
       {/* Form is always visible, no buttons needed */}
       <div className={style.inputform}>
-        <InputForm 
+        <InputForm
           inputFields={inputFields}
-          nonAnnuler={true}  // This prevents the form from closing
+          nonAnnuler={true} // This prevents the form from closing
         />
       </div>
 
       <div>
         <InfoBloc
+          dataType={"reception"}
           defaultTitle={"Réceptions"}
           defaultHeaders={[
             "Upe/Sku",

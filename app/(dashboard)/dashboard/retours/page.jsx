@@ -63,6 +63,7 @@ export default function retours() {
 
       <div>
         <InfoBloc
+          dataType={"retour"}
           defaultTitle={"Bon de Retours"}
           defaultHeaders={[
             "Upe/Sku",

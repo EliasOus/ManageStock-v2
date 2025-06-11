@@ -63,6 +63,7 @@ export default function Utilisateur() {
 
       <div>
         <InfoBloc
+          dataType={"utilisateur"}
           defaultTitle={"Utilisateurs"}
           defaultHeaders={[
             "Nom",

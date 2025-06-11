@@ -5,7 +5,11 @@ import InfoBloc from "@/components/InfoBlock";
 
 import datas from "@/data/datas.json";
 
-export default function Dashboard() {
+export default async function Dashboard() {
+  const produits = await prisma.produit.findMany();
+
+  const produitsReaprosisionner = produits.filter((item) => item.quantite <= 10);
+
   return (
     <>
       {/* <h1>dashboard page bonjour</h1> */}
@@ -13,13 +17,17 @@ export default function Dashboard() {
         <CarteInfo chiffre={"43 000"} titre={"Chiffre d'affaire"}></CarteInfo>
         <CarteInfo chiffre={"100"} titre={"Commande en cours"}></CarteInfo>
         <CarteInfo chiffre={"1 490"} titre={"Produits en stock"}></CarteInfo>
-        <CarteInfo chiffre={"19"} titre={"Produits a reaprovisionner"}></CarteInfo>
+        <CarteInfo
+          chiffre={"19"}
+          titre={"Produits a reaprovisionner"}
+        ></CarteInfo>
       </div>
       <div className={styles.madiv2}>
         <Chart></Chart>
       </div>
       <div className={styles.maDiv3}>
         <InfoBloc
+          dataType={"produit"}
           defaultTitle={"Produits a reaprovisionner"}
           defaultHeaders={[
             "Upe/Sku",
@@ -28,9 +36,8 @@ export default function Dashboard() {
             "Quantité",
             "Prix",
           ]}
-          data={datas.produitsRupture}
-        >
-        </InfoBloc>
+          data={produitsReaprosisionner}
+        ></InfoBloc>
       </div>
     </>
   );
