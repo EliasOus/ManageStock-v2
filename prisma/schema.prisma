@@ -55,7 +55,7 @@ model Commande {
   id                String       @id @default(cuid())
   numeroDeCommande  String       @unique
   sku               String
-  nomProduit        String
+  nom        String
   description       String
   fournisseur       String
   quantite          Int
