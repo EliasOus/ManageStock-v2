@@ -3,7 +3,6 @@ import styles from "./page.module.css";
 import Chart from "@/components/Chart";
 import InfoBloc from "@/components/InfoBlock";
 
-import datas from "@/data/datas.json";
 import { prisma } from "@/lib/prisma";
 
 export default async function Dashboard() {

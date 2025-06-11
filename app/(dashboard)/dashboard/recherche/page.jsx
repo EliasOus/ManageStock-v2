@@ -2,7 +2,6 @@ import InfoBloc from "@/components/InfoBlock.jsx";
 import styles from "./page.module.css";
 import Recherche1 from "@/components/Recherche";
 
-import datas from "@/data/datas.json";
 import { prisma } from "@/lib/prisma";
 
 export default async function Recherche() {
@@ -25,7 +24,7 @@ export default async function Recherche() {
               "Quantité",
               "Prix",
             ]}
-            data={produits}z
+            data={produits}
           />
         </div>
       </div>

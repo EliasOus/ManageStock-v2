@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import Button from "./Button";
 import styles from "./InputForm.module.css";
@@ -29,39 +28,79 @@ export default function InputForm({ className, inputFields, onClose }) {
     }
   };
 
+  const [isInputVisible, setInputVisible] = useState(false);
+  const toggleInputForm = () => {
+    setInputVisible(true);
+  };
+  const handleCloseForm = () => {
+    setInputVisible(false);
+  };
+
   return (
-    <form action={inputFormServer} className={`${styles.form} ${className}`}>
-      {inputFields.map((field, index) => (
-        <div key={index}>
-          {field.name === "description" ? (
-            // Render a textarea for the description input
-            <textarea
-              name={field.name}
-              value={inputValues[field.name]}
-              onChange={(e) => handleInputChange(field.name, e.target.value)}
-              placeholder={field.placeholder}
-              className={`${styles.input} ${styles.textarea}`} // Apply additional CSS for larger input
+    <>
+      {!isInputVisible && (
+        <div className={styles.boutons}>
+          <div onClick={toggleInputForm}>
+            <Button
+              texte={"Nouveau"}
+              active={true}
+              className={""}
+              type={"button"}
             />
-          ) : (
-            // Render a normal input field
-            <input
-              type="text"
-              name={field.name}
-              value={inputValues[field.name]}
-              onChange={(e) => handleInputChange(field.name, e.target.value)}
-              placeholder={field.placeholder}
-              className={styles.input}
+          </div>
+
+          <div onClick={toggleInputForm}>
+            <Button
+              texte={"Modifier"}
+              active={true}
+              className={""}
+              type={"button"}
             />
-          )}
+          </div>
+
+          <Button
+            texte={"Supprimer"}
+            active={true}
+            className={""}
+            type={"button"}
+          />
         </div>
-      ))}
-      <div className={styles.buttonContainer}>
-        <Button texte="Enregistrer" type="submit" active={true} />
-        {/* <button type="submit" onClick={onSubmit}>Enregistrer</button> */}
-        <div onClick={onClose}>
-          <Button texte="Annuler" type="button" active={true} />
+      )}
+
+      <form action={inputFormServer} className={`${styles.form} ${className}`}>
+        {inputFields.map((field, index) => (
+          <div key={index}>
+            {field.name === "description" ? (
+              // Render a textarea for the description input
+              <textarea
+                name={field.name}
+                value={inputValues[field.name]}
+                onChange={(e) => handleInputChange(field.name, e.target.value)}
+                placeholder={field.placeholder}
+                className={`${styles.input} ${styles.textarea}`} // Apply additional CSS for larger input
+              />
+            ) : (
+              // Render a normal input field
+              <input
+                type="text"
+                name={field.name}
+                value={inputValues[field.name]}
+                onChange={(e) => handleInputChange(field.name, e.target.value)}
+                placeholder={field.placeholder}
+                className={styles.input}
+              />
+            )}
+          </div>
+        ))}
+        <div className={styles.buttonContainer}>
+          <Button texte="Enregistrer" type="submit" active={true} />
+          {/* <button type="submit" onClick={onSubmit}>Enregistrer</button> */}
+          <div onClick={handleCloseForm}>
+          {/* <div onClick={onClose}> */}
+            <Button texte="Annuler" type="button" active={true} />
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </>
   );
 }

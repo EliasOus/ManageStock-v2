@@ -8,15 +8,12 @@ export default function InfoBloc({
   defaultHeaders,
   data = [],
 }) {
-  //  const [title, setTitle] = useState(defaultTitle);
-  //  const [headers, setHeaders] = useState(defaultHeaders);
-
   const getDataType = (item, dataType) => {
     switch (dataType) {
       case "produit":
         return item.prix;
       case "commande":
-        return item.nom;
+        return item.prix;
       case "retour":
         return item.nom;
       case "reception":
@@ -42,9 +39,6 @@ export default function InfoBloc({
           {data.length > 0 ? (
             data.map((item, index) => (
               <tr key={index}>
-                {/* {Object.values(item).map((value, id) => (
-         <td key={id}>{value}</td>
-        ))} */}
                 <td key={item.upeSku}> {item.sku}</td>
                 <td key={item.upeSku}> {item.nom}</td>
                 <td key={item.upeSku}> {item.fournisseur}</td>
