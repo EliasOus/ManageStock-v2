@@ -12,7 +12,17 @@ export default async function Utilisateur() {
     { name: "poste", placeholder: "Poste" },
   ];
 
-  const utilisateurs = await prisma.utilisateur.findMany();
+  const utilisateurs = await prisma.utilisateur.findMany({
+    select: {
+      id: true,
+      nom: true,
+      prenom: true,
+      nomUtilisateur: true,
+      motDePasse: true,
+      poste: true,
+    },
+  });
+  console.log(utilisateurs);
   return (
     <>
       <h1 className={style.titre}>Gestion d'utilisateur</h1>

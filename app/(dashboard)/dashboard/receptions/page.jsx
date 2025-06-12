@@ -10,7 +10,16 @@ export default async function receptions() {
     { name: "quantite", placeholder: "Quantité" },
   ];
 
-  const receptions = await prisma.reception.findMany();
+  const receptions = await prisma.reception.findMany({
+    select: {
+      id: true,
+      sku: true,
+      nom: true,
+      fournisseur: true,
+      quantite: true,
+      createdAt: true,
+    },
+  });
   return (
     <>
       <h1 className={style.titre}>Gestion des Réceptions</h1>

@@ -13,7 +13,16 @@ export default async function Inventaire() {
     { name: "quantite", placeholder: "Entrez la quantité" },
   ];
 
-  const commandes = await prisma.commande.findMany();
+  const commandes = await prisma.commande.findMany({
+    select: {
+      id: true,
+      sku: true,
+      nom: true,
+      fournisseur: true,
+      quantite: true,
+      prix: true,
+    },
+  });
 
   return (
     <>

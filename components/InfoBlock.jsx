@@ -24,6 +24,11 @@ export default function InfoBloc({
         return "";
     }
   };
+
+  const keys = Object.keys(data[0]);
+  // suprime la premier valeur du tableau le id
+  keys.shift();
+
   return (
     <div className={style.infoBloc}>
       <h2 className={style.tableTitle}>{defaultTitle}</h2>
@@ -39,11 +44,9 @@ export default function InfoBloc({
           {data.length > 0 ? (
             data.map((item, index) => (
               <tr key={index}>
-                <td key={item.upeSku}> {item.sku}</td>
-                <td key={item.upeSku}> {item.nom}</td>
-                <td key={item.upeSku}> {item.fournisseur}</td>
-                <td key={item.upeSku}> {item.quantite}</td>
-                <td key={item.upeSku}> {getDataType(item, dataType)}</td>
+                {keys.map((key) => (
+                  <td key={key}> {item[key]}</td>
+                ))}
               </tr>
             ))
           ) : (
@@ -55,6 +58,34 @@ export default function InfoBloc({
           )}
         </tbody>
       </table>
+      {/* <table className={style.infoTable}>
+        <thead>
+          <tr>
+            {defaultHeaders.map((header, index) => (
+              <th key={index}>{header}</th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {data.length > 0 ? (
+            data.map((item, index) => (
+              <tr key={index}>
+                <td key={item.id}> {item.sku}</td>
+                <td key={item.id}> {item.nom}</td>
+                <td key={item.id}> {item.fournisseur}</td>
+                <td key={item.id}> {item.quantite}</td>
+                <td key={item.id}> {getDataType(item, dataType)}</td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={defaultHeaders.length} className={style.noData}>
+                Aucune donnée disponible
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table> */}
     </div>
   );
 }
