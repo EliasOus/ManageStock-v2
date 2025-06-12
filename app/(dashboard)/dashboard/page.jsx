@@ -2,7 +2,7 @@ import CarteInfo from "@/components/CarteInfo";
 import styles from "./page.module.css";
 import Chart from "@/components/Chart";
 import InfoBloc from "@/components/InfoBlock";
-import formaterData from "@/actions/format-data";
+import formaterData from "@/lib/format-data";
 
 import { prisma } from "@/lib/prisma";
 

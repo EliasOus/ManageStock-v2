@@ -3,7 +3,7 @@ import InputForm from "@/components/InputForm";
 import style from "./page.module.css";
 import { prisma } from "@/lib/prisma";
 
-import formaterData from "@/actions/format-data";
+import formaterData from "@/lib/format-data";
 
 export default async function receptions() {
   const inputFields = [

@@ -1,7 +1,7 @@
 import InfoBloc from "@/components/InfoBlock.jsx";
 import styles from "./page.module.css";
 import Recherche1 from "@/components/Recherche";
-import formaterData from "@/actions/format-data";
+import formaterData from "@/lib/format-data";
 
 import { prisma } from "@/lib/prisma";
 

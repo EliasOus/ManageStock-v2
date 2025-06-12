@@ -2,7 +2,7 @@ import InfoBloc from "@/components/InfoBlock";
 import InputForm from "@/components/InputForm";
 import style from "./inventaire.module.css";
 import { prisma } from "@/lib/prisma";
-import formaterData from "@/actions/format-data";
+import formaterData from "@/lib/format-data";
 
 export default async function Inventaire() {
   const inputFields = [

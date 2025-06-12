@@ -2,7 +2,7 @@ import InfoBloc from "@/components/InfoBlock";
 import InputForm from "@/components/InputForm";
 import style from "./utilisateur.module.css";
 import { prisma } from "@/lib/prisma";
-import formaterData from "@/actions/format-data";
+import formaterData from "@/lib/format-data";
 
 export default async function Utilisateur() {
   const inputFields = [

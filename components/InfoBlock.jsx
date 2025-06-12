@@ -15,8 +15,6 @@ export default function InfoBloc({
   let keys =
     data.length !== 0 ? Object.keys(data[0]).filter((key) => key !== "id") : [];
 
-  console.log(keys);
-
   return (
     <div className={style.infoBloc}>
       <h2 className={style.tableTitle}>{defaultTitle}</h2>
