@@ -3,6 +3,8 @@ import InputForm from "@/components/InputForm";
 import style from "./page.module.css";
 import { prisma } from "@/lib/prisma";
 
+import formaterData from "@/actions/format-data";
+
 export default async function receptions() {
   const inputFields = [
     { name: "numeroCommande", placeholder: "Numéro de commande" },
@@ -13,22 +15,24 @@ export default async function receptions() {
   const receptions = await prisma.reception.findMany({
     select: {
       id: true,
-      quantite: true,
-      createdAt: true,
-      commande:{
-        select:{
+      commande: {
+        select: {
           numeroDeCommande: true,
           nom: true,
-        }
+        },
       },
-      utilisateur:{
-        select:{
+      createdAt: true,
+      quantite: true,
+      utilisateur: {
+        select: {
           nomUtilisateur: true,
-        }
-      }
+        },
+      },
     },
   });
-  
+
+  const receptionsFormater = await formaterData(receptions);
+
   return (
     <>
       <h1 className={style.titre}>Gestion des Réceptions</h1>
@@ -41,12 +45,12 @@ export default async function receptions() {
           defaultTitle={"Réceptions"}
           defaultHeaders={[
             "Numéro de commande",
-            "Date de réception",
             "Produit",
+            "Date de réception",
             "Quantité reçue",
             "utilisateur",
           ]}
-          data={receptions}
+          data={receptionsFormater}
         />
       </div>
     </>

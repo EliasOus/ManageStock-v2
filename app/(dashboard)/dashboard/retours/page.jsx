@@ -2,6 +2,7 @@ import InfoBloc from "@/components/InfoBlock";
 import InputForm from "@/components/InputForm";
 import style from "./page.module.css";
 import { prisma } from "@/lib/prisma";
+import formaterData from "@/actions/format-data";
 
 export default async function retours() {
   const inputFields = [
@@ -28,8 +29,7 @@ export default async function retours() {
     },
   });
 
-  console.log("********************/////////////////************");
-  console.log(retours);
+  const retoursFormater = await formaterData(retours);
 
   return (
     <>
@@ -49,7 +49,7 @@ export default async function retours() {
             "Motif",
             "Statut",
           ]}
-          data={retours}
+          data={retoursFormater}
         />
       </div>
     </>

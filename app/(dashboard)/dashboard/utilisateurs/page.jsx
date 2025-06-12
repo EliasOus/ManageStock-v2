@@ -2,6 +2,7 @@ import InfoBloc from "@/components/InfoBlock";
 import InputForm from "@/components/InputForm";
 import style from "./utilisateur.module.css";
 import { prisma } from "@/lib/prisma";
+import formaterData from "@/actions/format-data";
 
 export default async function Utilisateur() {
   const inputFields = [
@@ -23,6 +24,7 @@ export default async function Utilisateur() {
     },
   });
 
+  const utilisateursFormater = await formaterData(utilisateurs);
   return (
     <>
       <h1 className={style.titre}>Gestion d'utilisateur</h1>
@@ -40,7 +42,7 @@ export default async function Utilisateur() {
             "Mot de passe",
             "Poste",
           ]}
-          data={utilisateurs}
+          data={utilisateursFormater}
         />
       </div>
     </>

@@ -2,6 +2,7 @@ import CarteInfo from "@/components/CarteInfo";
 import styles from "./page.module.css";
 import Chart from "@/components/Chart";
 import InfoBloc from "@/components/InfoBlock";
+import formaterData from "@/actions/format-data";
 
 import { prisma } from "@/lib/prisma";
 
@@ -17,7 +18,9 @@ export default async function Dashboard() {
     },
   });
 
-  const produitsReaprosisionner = produits.filter((item) => item.quantite <= 10);
+  const produitsReaprosisionner = produits.filter((item) => item.quantite <= 20);
+
+  const produitsReapFormater = await formaterData(produitsReaprosisionner);
 
   return (
     <>
@@ -45,7 +48,7 @@ export default async function Dashboard() {
             "Quantité",
             "Prix",
           ]}
-          data={produitsReaprosisionner}
+          data={produitsReapFormater}
         ></InfoBloc>
       </div>
     </>

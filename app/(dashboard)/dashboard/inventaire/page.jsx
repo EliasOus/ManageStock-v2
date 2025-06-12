@@ -2,6 +2,7 @@ import InfoBloc from "@/components/InfoBlock";
 import InputForm from "@/components/InputForm";
 import style from "./inventaire.module.css";
 import { prisma } from "@/lib/prisma";
+import formaterData from "@/actions/format-data";
 
 export default async function Inventaire() {
   const inputFields = [
@@ -24,6 +25,8 @@ export default async function Inventaire() {
     },
   });
 
+  const commandesFormater = await formaterData(commandes);
+
   return (
     <>
       <h1 className={style.titre}>Articles & Inventaire</h1>
@@ -41,7 +44,7 @@ export default async function Inventaire() {
             "Quantité",
             "Prix",
           ]}
-          data={commandes}
+          data={commandesFormater}
         />
       </div>
     </>

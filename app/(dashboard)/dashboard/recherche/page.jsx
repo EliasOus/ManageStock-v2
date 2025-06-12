@@ -1,6 +1,7 @@
 import InfoBloc from "@/components/InfoBlock.jsx";
 import styles from "./page.module.css";
 import Recherche1 from "@/components/Recherche";
+import formaterData from "@/actions/format-data";
 
 import { prisma } from "@/lib/prisma";
 
@@ -15,6 +16,8 @@ export default async function Recherche() {
       prix: true,
     },
   });
+
+  const produitsFormater = await formaterData(produits);
 
   return (
     <>
@@ -33,7 +36,7 @@ export default async function Recherche() {
               "Quantité",
               "Prix",
             ]}
-            data={produits}
+            data={produitsFormater}
           />
         </div>
       </div>
