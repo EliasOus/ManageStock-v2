@@ -5,21 +5,6 @@
     border-bottom: solid rgb(126, 126, 126) 3px;
 }
 
-.boutons {
-    display: flex;
-    gap: 20px;
-    width: 80%;
-    margin: 25px auto;
-    justify-content: flex-end;
-}
-
-.dashboard {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    
-}
-
 .inputform {
     padding-left: 8rem;
     padding-bottom: 12px;

@@ -1,21 +1,9 @@
-"use client";
-import Button from "@/components/Button";
 import InfoBloc from "@/components/InfoBlock";
 import InputForm from "@/components/InputForm";
 import style from "./page.module.css";
-import datas from "@/data/datas.json";
-import { useState } from "react";
-import styles from "@/components/InputForm.module.css";
+import { prisma } from "@/lib/prisma";
 
-export default function retours() {
-  const [isInputVisible, setInputVisible] = useState(false);
-
-  const toggleInputForm = () => {
-    setInputVisible(true);
-  };
-  const handleCloseForm = () => {
-    setInputVisible(false);
-  };
+export default async function retours() {
   const inputFields = [
     { name: "bonCommande", placeholder: "Bon de commande" },
     { name: "upeSku", placeholder: "UPE/SKU" },
@@ -23,44 +11,14 @@ export default function retours() {
     { name: "fournisseur", placeholder: "Fournisseur" },
     { name: "quantite", placeholder: "Quantité" },
   ];
+
+  const retours = await prisma.retour.findMany();
   return (
     <>
-      <h1 className={style.titre}>Traitement des retours</h1>
-      {!isInputVisible && (
-        <div className={style.boutons}>
-          <div onClick={toggleInputForm}>
-            <Button
-              className={""}
-              texte={"Nouveau"}
-              active={true}
-              type={"button"}
-            />
-          </div>
-
-          <div onClick={toggleInputForm}>
-            <Button
-              texte={"Modifier"}
-              active={true}
-              className={""}
-              type={"button"}
-            />
-          </div>
-
-          <Button
-            texte={"Supprimer"}
-            active={true}
-            className={""}
-            type={"button"}
-          />
-        </div>
-      )}
-
-      {isInputVisible && (
-        <div className={style.inputform}>
-          <InputForm inputFields={inputFields} onClose={handleCloseForm} />
-        </div>
-      )}
-
+      <h1 className={style.titre}>Gestion des Retours</h1>
+      <div className={style.inputform}>
+        <InputForm inputFields={inputFields} />
+      </div>
       <div>
         <InfoBloc
           dataType={"retour"}
@@ -72,7 +30,7 @@ export default function retours() {
             "Quantité",
             "Date",
           ]}
-          data={datas.retours}
+          data={retours}
         />
       </div>
     </>

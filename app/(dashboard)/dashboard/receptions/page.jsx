@@ -1,28 +1,22 @@
-"use client";
 import InfoBloc from "@/components/InfoBlock";
 import InputForm from "@/components/InputForm";
 import style from "./page.module.css";
-import datas from "@/data/datas.json";
+import { prisma } from "@/lib/prisma";
 
-export default function receptions() {
+export default async function receptions() {
   const inputFields = [
     { name: "numeroCommande", placeholder: "Numéro de commande" },
     { name: "upe/sku", placeholder: "Upe/Sku" },
     { name: "quantite", placeholder: "Quantité" },
   ];
 
+  const receptions = await prisma.reception.findMany();
   return (
     <>
       <h1 className={style.titre}>Gestion des Réceptions</h1>
-
-      {/* Form is always visible, no buttons needed */}
       <div className={style.inputform}>
-        <InputForm
-          inputFields={inputFields}
-          nonAnnuler={true} // This prevents the form from closing
-        />
+        <InputForm inputFields={inputFields} />
       </div>
-
       <div>
         <InfoBloc
           dataType={"reception"}
@@ -34,7 +28,7 @@ export default function receptions() {
             "Quantité",
             "Date",
           ]}
-          data={datas.receptions}
+          data={receptions}
         />
       </div>
     </>
