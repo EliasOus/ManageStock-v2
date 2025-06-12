@@ -5,7 +5,16 @@ import Recherche1 from "@/components/Recherche";
 import { prisma } from "@/lib/prisma";
 
 export default async function Recherche() {
-  const produits = await prisma.produit.findMany();
+  const produits = await prisma.produit.findMany({
+    select: {
+      id: true,
+      sku: true,
+      nom: true,
+      fournisseur: true,
+      quantite: true,
+      prix: true,
+    },
+  });
 
   return (
     <>

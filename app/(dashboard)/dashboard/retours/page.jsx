@@ -12,7 +12,25 @@ export default async function retours() {
     { name: "quantite", placeholder: "Quantité" },
   ];
 
-  const retours = await prisma.retour.findMany();
+  const retours = await prisma.retour.findMany({
+    select: {
+      id: true,
+      numeroDeRetour: true,
+      createdAt: true,
+      commande: {
+        select: {
+          nom: true,
+        },
+      },
+      quantite: true,
+      motif: true,
+      statut: true,
+    },
+  });
+
+  console.log("********************/////////////////************");
+  console.log(retours);
+
   return (
     <>
       <h1 className={style.titre}>Gestion des Retours</h1>
@@ -24,11 +42,12 @@ export default async function retours() {
           dataType={"retour"}
           defaultTitle={"Bon de Retours"}
           defaultHeaders={[
-            "Upe/Sku",
-            "Nom d'article",
-            "Fournisseur",
-            "Quantité",
+            "Numéro de Retour",
             "Date",
+            "Produit",
+            "Quantité",
+            "Motif",
+            "Statut",
           ]}
           data={retours}
         />

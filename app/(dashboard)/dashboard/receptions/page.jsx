@@ -13,13 +13,22 @@ export default async function receptions() {
   const receptions = await prisma.reception.findMany({
     select: {
       id: true,
-      sku: true,
-      nom: true,
-      fournisseur: true,
       quantite: true,
       createdAt: true,
+      commande:{
+        select:{
+          numeroDeCommande: true,
+          nom: true,
+        }
+      },
+      utilisateur:{
+        select:{
+          nomUtilisateur: true,
+        }
+      }
     },
   });
+  
   return (
     <>
       <h1 className={style.titre}>Gestion des Réceptions</h1>
@@ -31,11 +40,11 @@ export default async function receptions() {
           dataType={"reception"}
           defaultTitle={"Réceptions"}
           defaultHeaders={[
-            "Upe/Sku",
-            "Nom d'article",
-            "Fournisseur",
-            "Quantité",
-            "Date",
+            "Numéro de commande",
+            "Date de réception",
+            "Produit",
+            "Quantité reçue",
+            "utilisateur",
           ]}
           data={receptions}
         />

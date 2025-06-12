@@ -13,7 +13,6 @@ export default function InputForm({ className, inputFields, onClose }) {
 
   const pathName = usePathname();
   const currentPage = pathName.split("/").pop();
-  console.log(currentPage);
 
   return (
     <>
@@ -46,39 +45,38 @@ export default function InputForm({ className, inputFields, onClose }) {
         </div>
       ) : null}
 
-      {(isInputVisible ||
-        currentPage === "receptions") && (
-          <form
-            action={inputFormServer}
-            className={`${styles.form} ${className}`}
-          >
-            {inputFields.map((field, index) => (
-              <div key={index}>
-                {field.name === "description" ? (
-                  // Render a textarea for the description input
-                  <textarea
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    className={`${styles.input} ${styles.textarea}`}
-                  />
-                ) : (
-                  <input
-                    type="text"
-                    name={field.name}
-                    placeholder={field.placeholder}
-                    className={styles.input}
-                  />
-                )}
-              </div>
-            ))}
-            <div className={styles.buttonContainer}>
-              <Button texte="Enregistrer" type="submit" active={true} />
-              <div onClick={handleVisibleForm}>
-                <Button texte="Annuler" type="button" active={true} />
-              </div>
+      {(isInputVisible || currentPage === "receptions") && (
+        <form
+          action={inputFormServer}
+          className={`${styles.form} ${className}`}
+        >
+          {inputFields.map((field, index) => (
+            <div key={index}>
+              {field.name === "description" ? (
+                // Render a textarea for the description input
+                <textarea
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  className={`${styles.input} ${styles.textarea}`}
+                />
+              ) : (
+                <input
+                  type="text"
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  className={styles.input}
+                />
+              )}
             </div>
-          </form>
-        )}
+          ))}
+          <div className={styles.buttonContainer}>
+            <Button texte="Enregistrer" type="submit" active={true} />
+            <div onClick={handleVisibleForm}>
+              <Button texte="Annuler" type="button" active={true} />
+            </div>
+          </div>
+        </form>
+      )}
     </>
   );
 }

@@ -6,7 +6,16 @@ import InfoBloc from "@/components/InfoBlock";
 import { prisma } from "@/lib/prisma";
 
 export default async function Dashboard() {
-  const produits = await prisma.produit.findMany();
+  const produits = await prisma.produit.findMany({
+    select: {
+      id: true,
+      sku: true,
+      nom: true,
+      fournisseur: true,
+      quantite: true,
+      prix: true,
+    },
+  });
 
   const produitsReaprosisionner = produits.filter((item) => item.quantite <= 10);
 

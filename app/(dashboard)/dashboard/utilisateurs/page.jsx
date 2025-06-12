@@ -22,7 +22,7 @@ export default async function Utilisateur() {
       poste: true,
     },
   });
-  console.log(utilisateurs);
+
   return (
     <>
       <h1 className={style.titre}>Gestion d'utilisateur</h1>

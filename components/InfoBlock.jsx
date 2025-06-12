@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
 import style from "./InfoBloc.module.css";
 
 export default function InfoBloc({
@@ -24,10 +24,31 @@ export default function InfoBloc({
         return "";
     }
   };
+  const pathName = usePathname();
+  const currentPage = pathName.split("/").pop();
 
-  const keys = Object.keys(data[0]);
-  // suprime la premier valeur du tableau le id
-  keys.shift();
+  // recuperer les clé de data et suprime l'id
+  let keys =
+    data.length !== 0 ? Object.keys(data[0]).filter((key) => key !== "id") : [];
+
+  // keys = currentPage === "retours" ? Object.keys(data[0]).filter((key) => key !== "commande") : [];
+  // console.log("///" + keys)
+  // let keys = [];
+  // if (data.length !== 0) {
+  //   if (currentPage === "retours") {
+  //     keys = Object.keys(data[0]).filter(
+  //       (key) => key !== "id" && key !== "commande"
+  //     );
+  //   } else if (currentPage === "receptions") {
+  //     keys = Object.keys(data[0]).filter(
+  //       (key) => key !== "id" && key !== "commande" && key !== "utilisateur"
+  //     );
+  //   } else {
+  //     keys = Object.keys(data[0]).filter((key) => key !== "id");
+  //   }
+  // }
+
+  console.log(keys);
 
   return (
     <div className={style.infoBloc}>
@@ -45,7 +66,24 @@ export default function InfoBloc({
             data.map((item, index) => (
               <tr key={index}>
                 {keys.map((key) => (
-                  <td key={key}> {item[key]}</td>
+                  // <td key={key}>
+                  //   {key === "createdAt"
+                  //     ? new Date(item[key]).toLocaleDateString()
+                  //     : typeof key === "object"
+                  //     ? key.map((article) => {
+                  //         item[key][article];
+                  //       })
+                  //     : item[key]}
+                  // </td>
+                  <td key={key}>
+                    {key === "createdAt"
+                      ? new Date(item[key]).toLocaleDateString()
+                      : (typeof item[key] === "object" && item[key] !== null) && currentPage === "retours"
+                      ? item.commande.nom
+                      : (typeof item[key] === "object" && item[key] !== null) && currentPage === "receptions"
+                      ? item.commande.nom + item.commande.numeroDeCommande
+                      : item[key]}
+                  </td>
                 ))}
               </tr>
             ))
