@@ -3,6 +3,7 @@ import InputForm from "@/components/InputForm";
 import style from "./inventaire.module.css";
 import { prisma } from "@/lib/prisma";
 import formaterData from "@/lib/format-data";
+import { inputCommandeServer } from "@/actions/commande-action";
 
 export default async function Inventaire() {
   const inputFields = [
@@ -17,6 +18,7 @@ export default async function Inventaire() {
   const commandes = await prisma.commande.findMany({
     select: {
       id: true,
+      numeroDeCommande: true,
       sku: true,
       nom: true,
       fournisseur: true,
@@ -31,13 +33,14 @@ export default async function Inventaire() {
     <>
       <h1 className={style.titre}>Articles & Inventaire</h1>
       <div className={style.inputform}>
-        <InputForm inputFields={inputFields} />
+        <InputForm inputFields={inputFields} ActionFunction={inputCommandeServer} />
       </div>
       <div>
         <InfoBloc
           dataType={"commande"}
           defaultTitle={"Inventaire"}
           defaultHeaders={[
+            "Numero De Commande",
             "Upe/Sku",
             "Nom d’article",
             "Fournisseur",

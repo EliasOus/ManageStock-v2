@@ -4,7 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import generateUniqueCommandeNumber from "@/lib/unique-commande-number"
 
-export const inputFormServer = async (formData) => {
+export const inputCommandeServer = async (formData) => {
   const numCommande = await generateUniqueCommandeNumber();
 
   const nouveauProduit = await prisma.commande.create({
