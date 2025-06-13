@@ -3,6 +3,7 @@ import InputForm from "@/components/InputForm";
 import style from "./utilisateur.module.css";
 import { prisma } from "@/lib/prisma";
 import formaterData from "@/lib/format-data";
+import { inputUtilisateurServer } from "@/actions/utilisateur-action";
 
 export default async function Utilisateur() {
   const inputFields = [
@@ -29,7 +30,7 @@ export default async function Utilisateur() {
     <>
       <h1 className={style.titre}>Gestion d'utilisateur</h1>
       <div className={style.inputform}>
-        <InputForm inputFields={inputFields} />
+        <InputForm inputFields={inputFields} ActionFunction={inputUtilisateurServer}/>
       </div>
       <div>
         <InfoBloc

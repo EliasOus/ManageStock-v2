@@ -2,10 +2,14 @@
 import { useState } from "react";
 import Button from "./Button";
 import styles from "./InputForm.module.css";
-import { inputFormServer } from "@/actions/inputForm-action";
 import { usePathname } from "next/navigation";
 
-export default function InputForm({ className, inputFields, onClose }) {
+export default function InputForm({
+  className,
+  inputFields,
+  onClose,
+  ActionFunction,
+}) {
   const [isInputVisible, setInputVisible] = useState(false);
   const handleVisibleForm = () => {
     !isInputVisible ? setInputVisible(true) : setInputVisible(false);
@@ -46,19 +50,27 @@ export default function InputForm({ className, inputFields, onClose }) {
       ) : null}
 
       {(isInputVisible || currentPage === "receptions") && (
-        <form
-          action={inputFormServer}
-          className={`${styles.form} ${className}`}
-        >
+        <form action={ActionFunction} className={`${styles.form} ${className}`}>
           {inputFields.map((field, index) => (
             <div key={index}>
               {field.name === "description" ? (
-                // Render a textarea for the description input
                 <textarea
                   name={field.name}
                   placeholder={field.placeholder}
                   className={`${styles.input} ${styles.textarea}`}
                 />
+              ) : field.name === "poste" ? (
+                <select
+                  name={field.name}
+                  id="poste"
+                  required
+                  className={styles.input}
+                >
+                  <option value="">-- Sélectionner un poste --</option>
+                  <option value="GERANT">Gérant</option>
+                  <option value="GESTIONNAIRE">Gestionnaire</option>
+                  <option value="TRAVAILLEUR">Travailleur</option>
+                </select>
               ) : (
                 <input
                   type="text"
@@ -71,9 +83,11 @@ export default function InputForm({ className, inputFields, onClose }) {
           ))}
           <div className={styles.buttonContainer}>
             <Button texte="Enregistrer" type="submit" active={true} />
-            <div onClick={handleVisibleForm}>
-              <Button texte="Annuler" type="button" active={true} />
-            </div>
+            {currentPage !== "receptions" ? (
+              <div onClick={handleVisibleForm}>
+                <Button texte="Annuler" type="button" active={true} />
+              </div>
+            ) : null}
           </div>
         </form>
       )}
