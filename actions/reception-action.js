@@ -7,7 +7,7 @@ import { z } from "zod";
 
 const inputSchema = z.object({
   numeroDeCommande: z.string().min(4).max(20),
-  quantite: z.number().int().min(1).max(10),
+  quantite: z.number().int().min(1).max(99999),
 });
 
 export const inputSafeReception = actionClient

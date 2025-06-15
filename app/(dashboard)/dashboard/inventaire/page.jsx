@@ -3,7 +3,7 @@ import InputForm from "@/components/InputForm";
 import style from "./inventaire.module.css";
 import { prisma } from "@/lib/prisma";
 import formaterData from "@/lib/format-data";
-import { inputCommandeServer } from "@/actions/commande-action";
+import { inputSafeCommande } from "@/actions/commande-action";
 
 export default async function Inventaire() {
   const inputFields = [
@@ -33,7 +33,7 @@ export default async function Inventaire() {
     <>
       <h1 className={style.titre}>Articles & Inventaire</h1>
       <div className={style.inputform}>
-        <InputForm inputFields={inputFields} ActionFunction={inputCommandeServer} />
+        <InputForm inputFields={inputFields} ActionFunction={inputSafeCommande} />
       </div>
       <div>
         <InfoBloc
