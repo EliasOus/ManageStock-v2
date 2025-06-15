@@ -4,11 +4,14 @@ import style from "./page.module.css";
 import { prisma } from "@/lib/prisma";
 
 import formaterData from "@/lib/format-data";
-import { inputReceptionServer } from "@/actions/reception-action";
+import {
+  inputReceptionServer,
+  inputSafeReception,
+} from "@/actions/reception-action";
 
 export default async function receptions() {
   const inputFields = [
-    { name: "numeroCommande", placeholder: "Numéro De commande" },
+    { name: "numeroDeCommande", placeholder: "Numéro De commande" },
     { name: "quantite", placeholder: "Quantité" },
   ];
 
@@ -37,7 +40,10 @@ export default async function receptions() {
     <>
       <h1 className={style.titre}>Gestion des Réceptions</h1>
       <div className={style.inputform}>
-        <InputForm inputFields={inputFields} ActionFunction={inputReceptionServer}/>
+        <InputForm
+          inputFields={inputFields}
+          ActionFunction={inputSafeReception}
+        />
       </div>
       <div>
         <InfoBloc
