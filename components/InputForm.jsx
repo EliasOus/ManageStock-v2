@@ -4,12 +4,9 @@ import Button from "./Button";
 import styles from "./InputForm.module.css";
 import { usePathname } from "next/navigation";
 
-export default function InputForm({
-  className,
-  inputFields,
-  onClose,
-  ActionFunction,
-}) {
+import { useAction } from "next-safe-action/hooks";
+
+export default function InputForm({ className, inputFields, ActionFunction }) {
   const [isInputVisible, setInputVisible] = useState(false);
   const handleVisibleForm = () => {
     !isInputVisible ? setInputVisible(true) : setInputVisible(false);
@@ -17,6 +14,23 @@ export default function InputForm({
 
   const pathName = usePathname();
   const currentPage = pathName.split("/").pop();
+
+  const { executeAsync, hasErrored } = useAction(ActionFunction);
+
+  const data = (fields, formData) => {
+  const result = {};
+  fields.forEach((field) => {
+    const value = formData.get(field.name);
+
+    // convertir les valeurs numériques
+    if (field.name === "quantite" || field.name === "prix") {
+      result[field.name] = Number(value);
+    } else {
+      result[field.name] = value;
+    }
+  });
+  return result;
+};
 
   return (
     <>
@@ -50,7 +64,15 @@ export default function InputForm({
       ) : null}
 
       {(isInputVisible || currentPage === "receptions") && (
-        <form action={ActionFunction} className={`${styles.form} ${className}`}>
+        <form
+          action={async (formData) => {
+            console.log("****************** ca marche ********");
+            const dataInput = data(inputFields, formData);
+            console.log(dataInput);
+            await executeAsync(dataInput);
+          }}
+          className={`${styles.form} ${className}`}
+        >
           {inputFields.map((field, index) => (
             <div key={index}>
               {field.name === "description" ? (
@@ -89,6 +111,7 @@ export default function InputForm({
               </div>
             ) : null}
           </div>
+          {hasErrored ? <p>il y a une erreur</p> : null}
         </form>
       )}
     </>

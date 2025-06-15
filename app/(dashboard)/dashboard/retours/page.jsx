@@ -3,11 +3,12 @@ import InputForm from "@/components/InputForm";
 import style from "./page.module.css";
 import { prisma } from "@/lib/prisma";
 import formaterData from "@/lib/format-data";
-import { inputRetourServer } from "@/actions/retour-action";
+import { inputSafeRetour } from "@/actions/retour-action";
+import { inputSafeUtilisateur } from "@/actions/utilisateur-action";
 
 export default async function retours() {
   const inputFields = [
-    { name: "NumeroCommande", placeholder: "Numero de commande" },
+    { name: "numeroDeCommande", placeholder: "Numero de commande" },
     { name: "quantite", placeholder: "quantite" },
     { name: "motif", placeholder: "motif" },
   ];
@@ -34,7 +35,10 @@ export default async function retours() {
     <>
       <h1 className={style.titre}>Gestion des Retours</h1>
       <div className={style.inputform}>
-        <InputForm inputFields={inputFields} ActionFunction={inputRetourServer} />
+        <InputForm
+          inputFields={inputFields}
+          ActionFunction={inputSafeRetour}
+        />
       </div>
       <div>
         <InfoBloc
