@@ -22,13 +22,32 @@ export const inputSafeRetour = actionClient
       where: {
         numeroDeCommande: numeroDeCommande,
       },
-      select: {
-        id: true,
-      },
     });
 
     if (!commande) {
       throw new Error("Commande introuvable.");
+    }
+
+    if (commande.quantiteRetournee === 0) {
+      await prisma.commande.update({
+        where: {
+          numeroDeCommande: numeroDeCommande,
+        },
+        data: {
+          quantiteRetournee: quantite,
+          quantiteRestante: commande.quantite - (commande.quantiteRecue + quantite),
+        },
+      });
+    } else {
+      await prisma.commande.update({
+        where: {
+          numeroDeCommande: numeroDeCommande,
+        },
+        data: {
+          quantiteRetournee: commande.quantiteRetournee + quantite,
+          quantiteRestante: commande.quantite - (commande.quantiteRecue + commande.quantiteRetournee  + quantite)
+        },
+      });
     }
 
     const newRetour = await prisma.retour.create({

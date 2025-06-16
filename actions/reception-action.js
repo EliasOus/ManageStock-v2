@@ -21,6 +21,10 @@ export const inputSafeReception = actionClient
       },
     });
 
+    if (!commande) {
+      throw new Error("Commande introuvable.");
+    }
+
     if (commande.quantiteRestante === 0) {
       await prisma.commande.update({
         where: {
@@ -41,11 +45,6 @@ export const inputSafeReception = actionClient
           quantiteRestante: commande.quantiteRestante - quantite,
         },
       });
-    }
-
-    console.log(commande);
-    if (!commande) {
-      throw new Error("Commande introuvable.");
     }
 
     const newReception = await prisma.reception.create({
