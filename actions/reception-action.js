@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { actionClient } from "@/lib/safe-action-client";
 import { revalidatePath } from "next/cache";
-import { z } from "zod";
+import { date, z } from "zod";
 
 const inputSchema = z.object({
   numeroDeCommande: z.string().min(4).max(20),
@@ -19,44 +19,72 @@ export const inputSafeReception = actionClient
       where: {
         numeroDeCommande: numeroDeCommande,
       },
-      select: {
-        id: true,
-      },
     });
 
+    if (commande.quantiteRestante === 0) {
+      await prisma.commande.update({
+        where: {
+          numeroDeCommande: numeroDeCommande,
+        },
+        data: {
+          quantiteRecue: quantite,
+          quantiteRestante: commande.quantite - quantite,
+        },
+      });
+    } else {
+      await prisma.commande.update({
+        where: {
+          numeroDeCommande: numeroDeCommande,
+        },
+        data: {
+          quantiteRecue: commande.quantiteRecue + quantite,
+          quantiteRestante: commande.quantiteRestante - quantite,
+        },
+      });
+    }
+
+    console.log(commande);
     if (!commande) {
       throw new Error("Commande introuvable.");
     }
 
-    const newReceprion = await prisma.reception.create({
+    const newReception = await prisma.reception.create({
       data: {
         commandeId: commande.id,
-        utilisateurId: "cmbtnga9b00090s0wzndn8040",
+        utilisateurId: "cmbzannxv00001g0u1lx2438u",
         quantite: quantite,
       },
     });
 
+    const existingProduit = await prisma.produit.findUnique({
+      where: {
+        sku: commande.sku,
+      },
+    });
+
+    if (!existingProduit) {
+      await prisma.produit.create({
+        data: {
+          sku: commande.sku,
+          nom: commande.nom,
+          description: commande.description,
+          fournisseur: commande.fournisseur,
+          quantite: quantite,
+          prix: commande.prix,
+        },
+      });
+    } else {
+      await prisma.produit.update({
+        where: {
+          sku: commande.sku,
+        },
+        data: {
+          quantite: existingProduit.quantite + quantite,
+        },
+      });
+    }
+
     revalidatePath("/");
 
-    return newReceprion;
+    return newReception;
   });
-export const inputReceptionServer = async (formData) => {
-  const commande = await prisma.commande.findUnique({
-    where: {
-      numeroDeCommande: formData.get("numeroCommande"),
-    },
-    select: {
-      id: true,
-    },
-  });
-
-  const receprion = await prisma.reception.create({
-    data: {
-      commandeId: commande.id,
-      utilisateurId: "cmbtnga9b00090s0wzndn8040",
-      quantite: parseInt(formData.get("quantite")),
-    },
-  });
-
-  revalidatePath("/");
-};

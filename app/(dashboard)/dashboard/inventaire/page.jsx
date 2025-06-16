@@ -24,6 +24,9 @@ export default async function Inventaire() {
       fournisseur: true,
       quantite: true,
       prix: true,
+      quantiteRecue: true,
+      quantiteRetournee: true,
+      quantiteRestante: true,
     },
   });
 
@@ -44,8 +47,11 @@ export default async function Inventaire() {
             "Upe/Sku",
             "Nom d’article",
             "Fournisseur",
-            "Quantité",
+            "Quantité Commandée",
             "Prix",
+            "Quantité reçue",
+            "Quantité retournée",
+            "Quantite Restante",
           ]}
           data={commandesFormater}
         />

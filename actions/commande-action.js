@@ -31,7 +31,7 @@ export const inputSafeCommande = actionClient
         fournisseur: fournisseur,
         quantite: quantite,
         prix: prix,
-        utilisateurId: "cmbtnga9b00090s0wzndn8040",
+        utilisateurId: "cmbzannxv00001g0u1lx2438u",
       },
     });
 
