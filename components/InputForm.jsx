@@ -47,7 +47,7 @@ export default function InputForm({ className, inputFields, ActionFunction }) {
           }}
         >
           <Button
-            texte={"Nouveau"}
+            texte={"Ajouter"}
             active={true}
             className={""}
             type={"button"}
