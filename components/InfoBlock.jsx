@@ -5,21 +5,29 @@ import { useDeleteItems } from "./delete-article";
 
 import { MdDeleteForever } from "react-icons/md";
 
-import { deleteFunction } from "@/actions/commande-action";
+import { deleteCommandeServer } from "@/actions/commande-action";
+import { deleteReceptionServer } from "@/actions/reception-action";
 
-export default function InfoBloc({
-  defaultTitle,
-  defaultHeaders,
-  data = [],
-}) {
+export default function InfoBloc({ defaultTitle, defaultHeaders, data = [] }) {
   const pathName = usePathname();
   const currentPage = pathName.split("/").pop();
+
+  console.log(currentPage)
 
   // recuperer les clé de data et suprime l'id
   let keys =
     data.length !== 0 ? Object.keys(data[0]).filter((key) => key !== "id") : [];
 
   const isDeleteMode = useDeleteItems((state) => state.deleteItem);
+
+  const handleDelete = (itemID) =>{
+    if(currentPage === "inventaire") {
+      deleteCommandeServer(itemID)
+    }
+    if(currentPage === "receptions"){
+      deleteReceptionServer(itemID)
+    }
+  }
   return (
     <div className={style.infoBloc}>
       <h2 className={style.tableTitle}>{defaultTitle}</h2>
@@ -43,7 +51,7 @@ export default function InfoBloc({
                     <button
                       className={style.btnDelete}
                       onClick={() => {
-                        deleteFunction(item.id);
+                        handleDelete(item.id);
                       }}
                     >
                       <MdDeleteForever />

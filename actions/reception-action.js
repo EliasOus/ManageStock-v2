@@ -87,3 +87,21 @@ export const inputSafeReception = actionClient
 
     return newReception;
   });
+
+export const deleteReceptionServer = async (itemId) => {
+  const recpetion = await prisma.reception.findUnique({
+    where: { id: itemId },
+  });
+
+  if (!recpetion) {
+    throw new Error("Commande introuvable");
+  }
+
+  await prisma.reception.delete({
+    where: {
+      id: itemId,
+    },
+  });
+
+  revalidatePath("/");
+};

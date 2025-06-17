@@ -39,7 +39,7 @@ export const inputSafeCommande = actionClient
     return newProduit;
   });
 
-export const deleteFunction = async (itemId) => {
+export const deleteCommandeServer = async (itemId) => {
   const commande = await prisma.commande.findUnique({
     where: { id: itemId },
     include: {
