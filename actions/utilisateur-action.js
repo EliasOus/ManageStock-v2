@@ -32,3 +32,21 @@ export const inputSafeUtilisateur = actionClient
     revalidatePath("/");
     return newUtilisateur;
   });
+
+export const deleteUtilisateurServer = async (itemId) => {
+  const utilisateur = await prisma.utilisateur.findUnique({
+    where: { id: itemId },
+  });
+
+  if (!utilisateur) {
+    throw new Error("Commande introuvable");
+  }
+
+  await prisma.utilisateur.delete({
+    where: {
+      id: itemId,
+    },
+  });
+
+  revalidatePath("/");
+};

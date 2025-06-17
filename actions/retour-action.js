@@ -64,3 +64,21 @@ export const inputSafeRetour = actionClient
 
     return newRetour;
   });
+
+  export const deleteRetourServer = async (itemId) => {
+  const retour = await prisma.retour.findUnique({
+    where: { id: itemId },
+  });
+
+  if (!retour) {
+    throw new Error("Commande introuvable");
+  }
+
+  await prisma.retour.delete({
+    where: {
+      id: itemId,
+    },
+  });
+
+  revalidatePath("/");
+};

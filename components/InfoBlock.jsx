@@ -7,12 +7,14 @@ import { MdDeleteForever } from "react-icons/md";
 
 import { deleteCommandeServer } from "@/actions/commande-action";
 import { deleteReceptionServer } from "@/actions/reception-action";
+import { deleteRetourServer } from "@/actions/retour-action";
+import { deleteUtilisateurServer } from "@/actions/utilisateur-action";
 
 export default function InfoBloc({ defaultTitle, defaultHeaders, data = [] }) {
   const pathName = usePathname();
   const currentPage = pathName.split("/").pop();
 
-  console.log(currentPage)
+  console.log(currentPage);
 
   // recuperer les clé de data et suprime l'id
   let keys =
@@ -20,14 +22,24 @@ export default function InfoBloc({ defaultTitle, defaultHeaders, data = [] }) {
 
   const isDeleteMode = useDeleteItems((state) => state.deleteItem);
 
-  const handleDelete = (itemID) =>{
-    if(currentPage === "inventaire") {
-      deleteCommandeServer(itemID)
+  const handleDelete = (itemID) => {
+    switch (currentPage) {
+      case "inventaire":
+        deleteCommandeServer(itemID);
+        break;
+      case "receptions":
+        deleteReceptionServer(itemID);
+        break;
+      case "retours":
+        deleteRetourServer(itemID);
+        break;
+      case "utilisateurs":
+        deleteUtilisateurServer(itemID);
+        break;
+      default:
+        console.warn("Page non reconnue");
     }
-    if(currentPage === "receptions"){
-      deleteReceptionServer(itemID)
-    }
-  }
+  };
   return (
     <div className={style.infoBloc}>
       <h2 className={style.tableTitle}>{defaultTitle}</h2>
