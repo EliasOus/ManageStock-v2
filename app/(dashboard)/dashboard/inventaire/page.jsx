@@ -30,17 +30,20 @@ export default async function Inventaire() {
     },
   });
 
+  
   const commandesFormater = await formaterData(commandes);
 
   return (
     <>
       <h1 className={style.titre}>Articles & Inventaire</h1>
       <div className={style.inputform}>
-        <InputForm inputFields={inputFields} ActionFunction={inputSafeCommande} />
+        <InputForm
+          inputFields={inputFields}
+          ActionFunction={inputSafeCommande}
+        />
       </div>
       <div>
         <InfoBloc
-          dataType={"commande"}
           defaultTitle={"Inventaire"}
           defaultHeaders={[
             "Numero De Commande",

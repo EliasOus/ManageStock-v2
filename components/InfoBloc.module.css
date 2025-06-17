@@ -38,3 +38,16 @@
  color: #888;
  font-style: italic;
 }
+
+.btnDelete{
+    background-color: transparent;
+    border: none;
+    font-size: 2rem;
+    color: red;
+    cursor: pointer;
+}
+
+.btnDelete:hover {
+  transform: rotate(10deg) scale(1.20);
+  transition: transform 0.2s ease-in-out;
+}

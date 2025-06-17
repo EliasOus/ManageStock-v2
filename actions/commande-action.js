@@ -11,7 +11,7 @@ const inputschema = z.object({
   nom: z.string().min(3).max(20),
   description: z.string().min(3).max(50),
   fournisseur: z.string().min(3).max(20),
-  prix: z.number().min(.001).max(99999.99),
+  prix: z.number().min(0.001).max(99999.99),
   quantite: z.number().int().min(1).max(99999),
 });
 
@@ -38,3 +38,39 @@ export const inputSafeCommande = actionClient
     revalidatePath("/");
     return newProduit;
   });
+
+export const deleteFunction = async (itemId) => {
+  const commande = await prisma.commande.findUnique({
+    where: { id: itemId },
+    include: {
+      receptions: true,
+      retours: true,
+    },
+  });
+
+  if (!commande) {
+    throw new Error("Commande introuvable");
+  }
+
+  // Supprimer les réceptions liées à la commande s'il y en a
+  if (commande.receptions.length > 0) {
+    await prisma.reception.deleteMany({
+      where: { commandeId: itemId },
+    });
+  }
+
+  // Supprimer les retours liés à la commande s'il y en a
+  if (commande.retours.length > 0) {
+    await prisma.retour.deleteMany({
+      where: { commandeId: itemId },
+    });
+  }
+
+  await prisma.commande.delete({
+    where: {
+      id: itemId,
+    },
+  });
+
+  revalidatePath("/");
+};

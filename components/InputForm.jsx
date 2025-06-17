@@ -5,8 +5,13 @@ import styles from "./InputForm.module.css";
 import { usePathname } from "next/navigation";
 
 import { useAction } from "next-safe-action/hooks";
+import { useDeleteItems } from "./delete-article";
 
-export default function InputForm({ className, inputFields, ActionFunction }) {
+export default function InputForm({
+  className,
+  inputFields,
+  ActionFunction,
+}) {
   const [isInputVisible, setInputVisible] = useState(false);
   const handleVisibleForm = () => {
     !isInputVisible ? setInputVisible(true) : setInputVisible(false);
@@ -18,20 +23,21 @@ export default function InputForm({ className, inputFields, ActionFunction }) {
   const { executeAsync, hasErrored } = useAction(ActionFunction);
 
   const data = (fields, formData) => {
-  const result = {};
-  fields.forEach((field) => {
-    const value = formData.get(field.name);
+    const result = {};
+    fields.forEach((field) => {
+      const value = formData.get(field.name);
 
-    // convertir les valeurs numériques
-    if (field.name === "quantite" || field.name === "prix") {
-      result[field.name] = Number(value);
-    } else {
-      result[field.name] = value;
-    }
-  });
-  return result;
-};
+      // convertir les valeurs numériques
+      if (field.name === "quantite" || field.name === "prix") {
+        result[field.name] = Number(value);
+      } else {
+        result[field.name] = value;
+      }
+    });
+    return result;
+  };
 
+  const toggleDeleteItem = useDeleteItems((state) => state.toggleDeleteItem);
   return (
     <>
       {currentPage !== "receptions" ? (
@@ -54,19 +60,19 @@ export default function InputForm({ className, inputFields, ActionFunction }) {
             />
           </div>
 
-          <Button
-            texte={"Supprimer"}
-            active={true}
-            className={""}
-            type={"button"}
-          />
+          <div onClick={toggleDeleteItem}>
+            <Button
+              texte={"Supprimer"}
+              active={true}
+              className={""}
+              type={"button"}
+            />
+          </div>
         </div>
       ) : null}
-
       {(isInputVisible || currentPage === "receptions") && (
         <form
           action={async (formData) => {
-            console.log("****************** ca marche ********");
             const dataInput = data(inputFields, formData);
             console.log(dataInput);
             await executeAsync(dataInput);
