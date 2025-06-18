@@ -15,7 +15,6 @@ const inputSchema = z.object({
 export const inputSafeUtilisateur = actionClient
   .inputSchema(inputSchema)
   .action(async ({ parsedInput }) => {
-    console.log("---- utilisateur -----");
     const { nom, prenom, nomUtilisateur, motDePasse, poste } = parsedInput;
 
     const newUtilisateur = await prisma.utilisateur.create({

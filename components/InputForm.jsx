@@ -73,7 +73,6 @@ export default function InputForm({ className, inputFields, ActionFunction }) {
         <form
           action={async (formData) => {
             const dataInput = data(inputFields, formData);
-            console.log(dataInput);
             await executeAsync(dataInput);
           }}
           className={`${styles.form} ${className}`}

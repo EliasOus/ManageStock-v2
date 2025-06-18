@@ -14,8 +14,6 @@ export default function InfoBloc({ defaultTitle, defaultHeaders, data = [] }) {
   const pathName = usePathname();
   const currentPage = pathName.split("/").pop();
 
-  console.log(currentPage);
-
   // recuperer les clé de data et suprime l'id
   let keys =
     data.length !== 0 ? Object.keys(data[0]).filter((key) => key !== "id") : [];
