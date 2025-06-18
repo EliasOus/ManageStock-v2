@@ -1,5 +1,4 @@
 "use client";
-import styles from "./RechercheWrap.module.css";
 import RechercheBar from "@/components/RechercheBar";
 import InfoBloc from "@/components/InfoBlock.jsx";
 import { useState } from "react";

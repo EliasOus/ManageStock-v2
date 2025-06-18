@@ -2,9 +2,14 @@ import CarteInfo from "@/components/CarteInfo";
 import styles from "./page.module.css";
 import Chart from "@/components/Chart";
 import InfoBloc from "@/components/InfoBlock";
-import formaterData from "@/lib/format-data";
 
 import { prisma } from "@/lib/prisma";
+import {
+  nbrCommandeEnStock,
+  nbrProduitsEnStock,
+  ValeurTotaleStock,
+} from "@/lib/dashboard";
+import formaterData from "@/lib/format-data";
 
 export default async function Dashboard() {
   const produits = await prisma.produit.findMany({
@@ -18,19 +23,33 @@ export default async function Dashboard() {
     },
   });
 
-  const produitsReaprosisionner = produits.filter((item) => item.quantite <= 20);
+  const produitsReaprosisionner = produits.filter(
+    (item) => item.quantite <= 20
+  );
 
-  const produitsReapFormater = await formaterData(produitsReaprosisionner);
+  const produitsReapFormater = formaterData(produitsReaprosisionner);
+
+  const nmbProduit = nbrProduitsEnStock();
+  const nmbCommande = nbrCommandeEnStock();
+  const valeurStock = ValeurTotaleStock();
+  
+  const nbrProduitsReaprosisionner = produitsReaprosisionner.length;
 
   return (
     <>
       {/* <h1>dashboard page bonjour</h1> */}
       <div className={styles.maDiv1}>
-        <CarteInfo chiffre={"43 000"} titre={"Chiffre d'affaire"}></CarteInfo>
-        <CarteInfo chiffre={"100"} titre={"Commande en cours"}></CarteInfo>
-        <CarteInfo chiffre={"1 490"} titre={"Produits en stock"}></CarteInfo>
         <CarteInfo
-          chiffre={"19"}
+          chiffre={valeurStock}
+          titre={"Valeur totale du stock"}
+        ></CarteInfo>
+        <CarteInfo
+          chiffre={nmbCommande}
+          titre={"Commande en cours"}
+        ></CarteInfo>
+        <CarteInfo chiffre={nmbProduit} titre={"Produits en stock"}></CarteInfo>
+        <CarteInfo
+          chiffre={nbrProduitsReaprosisionner}
           titre={"Produits a reaprovisionner"}
         ></CarteInfo>
       </div>
