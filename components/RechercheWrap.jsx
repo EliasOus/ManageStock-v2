@@ -26,7 +26,6 @@ export default function RechercheWrap({ defaultDataFormater }) {
             "Quantité",
             "Prix",
           ]}
-          //   data={resultat}
           data={resultatFormates}
         />
       </div>

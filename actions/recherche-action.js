@@ -11,6 +11,14 @@ export async function rechercheProduits(query) {
         { description: { contains: query, mode: "insensitive" } },
       ],
     },
+    select: {
+      id: true,
+      sku: true,
+      nom: true,
+      fournisseur: true,
+      quantite: true,
+      prix: true,
+    },
     take: 20,
   });
 

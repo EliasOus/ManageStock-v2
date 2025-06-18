@@ -4,7 +4,6 @@ import style from "./page.module.css";
 import { prisma } from "@/lib/prisma";
 import formaterData from "@/lib/format-data";
 import { inputSafeRetour } from "@/actions/retour-action";
-import { inputSafeUtilisateur } from "@/actions/utilisateur-action";
 
 export default async function retours() {
   const inputFields = [
@@ -29,7 +28,7 @@ export default async function retours() {
     },
   });
 
-  const retoursFormater = await formaterData(retours);
+  const retoursFormater = formaterData(retours);
 
   return (
     <>

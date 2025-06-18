@@ -25,7 +25,7 @@ export default async function Utilisateur() {
     },
   });
 
-  const utilisateursFormater = await formaterData(utilisateurs);
+  const utilisateursFormater = formaterData(utilisateurs);
   return (
     <>
       <h1 className={style.titre}>Gestion d'utilisateur</h1>
