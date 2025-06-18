@@ -12,23 +12,19 @@ export default function RechercheWrap({ defaultDataFormater }) {
 
   return (
     <>
-      <div className={styles.divRecherche}>
-        <RechercheBar setResultat={setResultat} />
-      </div>
-      <div className={styles.infoBloc}>
-        <InfoBloc
-          dataType={"produit"}
-          defaultTitle={"Recherche Article"}
-          defaultHeaders={[
-            "Upe/Sku",
-            "Nom d’article",
-            "Fournisseur",
-            "Quantité",
-            "Prix",
-          ]}
-          data={resultatFormates}
-        />
-      </div>
+      <RechercheBar setResultat={setResultat} />
+      <InfoBloc
+        dataType={"produit"}
+        defaultTitle={"Recherche Article"}
+        defaultHeaders={[
+          "Upe/Sku",
+          "Nom d’article",
+          "Fournisseur",
+          "Quantité",
+          "Prix",
+        ]}
+        data={resultatFormates}
+      />
     </>
   );
 }

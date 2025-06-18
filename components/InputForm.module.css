@@ -9,7 +9,7 @@
   padding: 10px;
   border-radius: 10px;
   background-color: #F3F3F3;
-  font-size: 16px;
+  font-size: .8rem;
   border: 1px solid rgb(0 0 0 / 10%);
   box-shadow: 0px 0px 15px 0px rgb(0 0 0 / 10%);
   width: 17rem;
@@ -27,17 +27,20 @@
 
 /* Update only the textarea to be longer horizontally and disable manual resizing */
 .textarea {
-  height: 100px;  /* Keep the current height */
-  width: 150%;    /* Make it 50% wider than the other inputs */
-  max-width: 600px; /* Optional: limit the maximum width */
-  resize: none; 
+  height: 100px;
+  /* Keep the current height */
+  width: 150%;
+  /* Make it 50% wider than the other inputs */
+  max-width: 600px;
+  /* Optional: limit the maximum width */
+  resize: none;
 }
 
 
 .boutons {
-    display: flex;
-    gap: 20px;
-    width: 80%;
-    margin: 25px auto;
-    justify-content: flex-end;
+  display: flex;
+  gap: 20px;
+  width: 90%;
+  margin: 25px auto;
+  justify-content: flex-end;
 }
