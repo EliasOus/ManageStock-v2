@@ -1,10 +1,12 @@
+import { inscription } from "@/actions/inscription-action";
 import styles from "./page.module.css";
-import FormInscription from "@/components/login";
+import Login from "@/components/login";
 
 export default function Inscription() {
+
   return (
     <>
-      <FormInscription/>
+      <Login functionAction={inscription}/>
     </>
   );
 }

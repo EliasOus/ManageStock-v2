@@ -1,10 +1,11 @@
+import { connexion } from "@/actions/connexion-action";
 import styles from "./page.module.css";
-import FormInscription from "@/components/login";
+import Login from "@/components/login";
 
 export default function Connexion() {
   return (
     <>
-      <FormInscription/>
+      <Login functionAction={connexion}/>
     </>
   );
 }
