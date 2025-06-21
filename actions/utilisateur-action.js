@@ -17,7 +17,7 @@ export const inputSafeUtilisateur = actionClient
   .action(async ({ parsedInput }) => {
     const { nom, prenom, nomUtilisateur, motDePasse, poste } = parsedInput;
 
-    const newUtilisateur = await prisma.utilisateur.create({
+    const newUtilisateur = await prisma.user.create({
       data: {
         nom: nom,
         prenom: prenom,
@@ -33,7 +33,7 @@ export const inputSafeUtilisateur = actionClient
   });
 
 export const deleteUtilisateurServer = async (itemId) => {
-  const utilisateur = await prisma.utilisateur.findUnique({
+  const utilisateur = await prisma.user.findUnique({
     where: { id: itemId },
   });
 
@@ -41,7 +41,7 @@ export const deleteUtilisateurServer = async (itemId) => {
     throw new Error("Commande introuvable");
   }
 
-  await prisma.utilisateur.delete({
+  await prisma.user.delete({
     where: {
       id: itemId,
     },

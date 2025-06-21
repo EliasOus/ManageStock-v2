@@ -14,7 +14,7 @@ export default async function Utilisateur() {
     { name: "poste", placeholder: "Poste" },
   ];
 
-  const utilisateurs = await prisma.utilisateur.findMany({
+  const utilisateurs = await prisma.user.findMany({
     select: {
       id: true,
       nom: true,
