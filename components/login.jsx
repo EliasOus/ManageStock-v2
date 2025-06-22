@@ -54,15 +54,13 @@ export default function Login({ functionAction }) {
         action={async (formData) => {
           const data = newFormData(formData);
           const resultat = await executeAsync(data);
-          console.log(resultat)
+          console.log(resultat);
           if (resultat.data.status === "error") {
             setErreur(resultat.data.message);
             return;
           }
 
-          if (url === "/login") {
-            router.push("/");
-          } else {
+          if (url === "/inscription") {
             router.push("/login");
           }
         }}
@@ -112,13 +110,13 @@ export default function Login({ functionAction }) {
             {/* <div className={style.erreur}>{formState.motDePasse.erreur}</div> */}
           </label>
         </div>
+        {erreur && <p className={style.erreur}>{erreur}</p>}
         <Button
           texte={url === "/login" ? "Se Connecter" : "S'inscrire"}
           active={true}
           className={style.button}
           type={"submit"}
         />
-        {erreur && <p className={style.erreur}>{erreur}</p>}
       </form>
     </div>
   );

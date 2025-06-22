@@ -1,7 +1,7 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 import { actionClient, safeActionError } from "@/lib/safe-action-client";
-import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcryptjs";
 import { inscriptionSchema } from "@/lib/schema";
 
 export const inscription = actionClient

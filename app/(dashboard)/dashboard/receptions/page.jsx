@@ -26,7 +26,7 @@ export default async function receptions() {
       },
       createdAt: true,
       quantite: true,
-      utilisateur: {
+      user: {
         select: {
           nomUtilisateur: true,
         },
@@ -34,7 +34,7 @@ export default async function receptions() {
     },
   });
 
-  const receptionsFormater = await formaterData(receptions);
+  const receptionsFormater = formaterData(receptions);
 
   return (
     <>

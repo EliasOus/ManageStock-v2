@@ -20,12 +20,20 @@ import { FiUsers } from "react-icons/fi";
  * Utilise `usePathname()` pour récupérer l'URL et applique une classe spécifique
  * aux liens actifs.
  */
-export default function SideBar() {
+export default function SideBar({ session }) {
   // Récupération du chemin actuel pour déterminer l'élément actif
   const url = usePathname();
 
+  // console.log(JSON.stringify(session));
   return (
     <div className={style.sideBar}>
+      <div className={style.titre}>
+        <h2>bienvenue</h2>
+        <p>
+          {session.user.nom} {session.user.prenom}
+        </p>
+      </div>
+
       <nav>
         <ul>
           <li>
@@ -145,14 +153,10 @@ export default function SideBar() {
             )}
           </li>
         </ul>
-        <ul>
-          <li>
-            <div>
-              <MdOutlineLogout className={style.sideBarLogo} />
-              <Link href="/">Déconnexion</Link>
-            </div>
-          </li>
-        </ul>
+        <div className={style.btnDeconexion}>
+          <MdOutlineLogout className={style.sideBarLogo} />
+          <Link href="/">Déconnexion</Link>
+        </div>
       </nav>
     </div>
   );
