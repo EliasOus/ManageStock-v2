@@ -6,12 +6,16 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import { usePathname, useRouter } from "next/navigation";
 import { useAction } from "next-safe-action/hooks";
+import { useState } from "react";
 
 export default function Login({ functionAction }) {
   const url = usePathname();
   const router = useRouter();
-  
+
+  const [erreur, setErreur] = useState("");
+
   const { executeAsync, hasErrored } = useAction(functionAction);
+
   const newFormData = (formData) => {
     if (url === "/login") {
       return {
@@ -20,8 +24,8 @@ export default function Login({ functionAction }) {
       };
     } else {
       return {
-        nomDeEntreprise: formData.get("nomDeEntreprise"),
-        email: formData.get("email"),
+        nom: formData.get("nom"),
+        prenom: formData.get("prenom"),
         nomUtilisateur: formData.get("nomUtilisateur"),
         motDePasse: formData.get("motDePasse"),
       };
@@ -49,8 +53,18 @@ export default function Login({ functionAction }) {
       <form
         action={async (formData) => {
           const data = newFormData(formData);
-          console.log(data);
-          await executeAsync(data);
+          const resultat = await executeAsync(data);
+          console.log(resultat)
+          if (resultat.data.status === "error") {
+            setErreur(resultat.data.message);
+            return;
+          }
+
+          if (url === "/login") {
+            router.push("/");
+          } else {
+            router.push("/login");
+          }
         }}
         className={style.form}
         noValidate
@@ -59,19 +73,19 @@ export default function Login({ functionAction }) {
           <label className={url === "/login" ? style.activeLogin : ""}>
             <input
               type="text"
-              name="nomDeEntreprise"
+              name="nom"
               minLength={3}
               maxLength={20}
               required
-              placeholder="Nom de l'Entreprise"
+              placeholder="Nom"
             />
             {/* <div className={style.erreur}>
-              {formState.nomDeEntreprise.erreur}
+              {formState.nom.erreur}
             </div> */}
           </label>
           <label className={url === "/login" ? style.activeLogin : ""}>
-            <input type="text" name="email" required placeholder="Email" />
-            {/* <div className={style.erreur}>{formState.email.erreur}</div> */}
+            <input type="text" name="prenom" required placeholder="Prenom" />
+            {/* <div className={style.erreur}>{formState.prenom.erreur}</div> */}
           </label>
           <label>
             <input
@@ -104,6 +118,7 @@ export default function Login({ functionAction }) {
           className={style.button}
           type={"submit"}
         />
+        {erreur && <p className={style.erreur}>{erreur}</p>}
       </form>
     </div>
   );

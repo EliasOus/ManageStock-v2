@@ -7,7 +7,7 @@ export default function Button({ texte, className, active, type, goToUrl }) {
     redirect(`${goToUrl}`);
   };
   return (
-    <div>
+    <>
       {goToUrl ? (
         <button
           className={`${styles.button} ${className} ${
@@ -28,6 +28,6 @@ export default function Button({ texte, className, active, type, goToUrl }) {
           {texte}
         </button>
       )}
-    </div>
+    </>
   );
 }
