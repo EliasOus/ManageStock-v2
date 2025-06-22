@@ -1,18 +1,12 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 import { actionClient } from "@/lib/safe-action-client";
+import { retourSchema } from "@/lib/schema";
 import generateUniqueCommandeNumber from "@/lib/unique-commande-number";
 import { revalidatePath } from "next/cache";
-import { z } from "zod";
-
-const inputSchema = z.object({
-  numeroDeCommande: z.string().min(4).max(20),
-  quantite: z.number().int().min(1).max(99999),
-  motif: z.string().min(4).max(100),
-});
 
 export const inputSafeRetour = actionClient
-  .inputSchema(inputSchema)
+  .inputSchema(retourSchema)
   .action(async ({ parsedInput }) => {
     const { numeroDeCommande, quantite, motif } = parsedInput;
 

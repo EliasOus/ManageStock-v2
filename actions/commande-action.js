@@ -5,18 +5,10 @@ import { revalidatePath } from "next/cache";
 import generateUniqueCommandeNumber from "@/lib/unique-commande-number";
 import { z } from "zod";
 import { actionClient } from "@/lib/safe-action-client";
-
-const inputschema = z.object({
-  sku: z.string().min(3).max(10),
-  nom: z.string().min(3).max(20),
-  description: z.string().min(3).max(50),
-  fournisseur: z.string().min(3).max(20),
-  prix: z.number().min(0.001).max(99999.99),
-  quantite: z.number().int().min(1).max(99999),
-});
+import { commandeSchema } from "@/lib/schema";
 
 export const inputSafeCommande = actionClient
-  .inputSchema(inputschema)
+  .inputSchema(commandeSchema)
   .action(async ({ parsedInput }) => {
     const { sku, nom, description, fournisseur, prix, quantite } = parsedInput;
 

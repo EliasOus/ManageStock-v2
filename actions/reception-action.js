@@ -2,16 +2,12 @@
 
 import { prisma } from "@/lib/prisma";
 import { actionClient } from "@/lib/safe-action-client";
+import { recpetionSchema } from "@/lib/schema";
 import { revalidatePath } from "next/cache";
 import { date, z } from "zod";
 
-const inputSchema = z.object({
-  numeroDeCommande: z.string().min(4).max(20),
-  quantite: z.number().int().min(1).max(99999),
-});
-
 export const inputSafeReception = actionClient
-  .inputSchema(inputSchema)
+  .inputSchema(recpetionSchema)
   .action(async ({ parsedInput }) => {
     const { numeroDeCommande, quantite } = parsedInput;
 

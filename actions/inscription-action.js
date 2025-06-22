@@ -1,46 +1,11 @@
 "use server";
 import { prisma } from "@/lib/prisma";
 import { actionClient, safeActionError } from "@/lib/safe-action-client";
-import { z } from "zod";
 import * as bcrypt from "bcrypt";
-
-const inputSchema = z.object({
-  nom: z
-    .string()
-    .min(4, {
-      message: "Le nom de doit contenir au moins 4 caractères.",
-    })
-    .max(10, {
-      message: "Le nom doit contenir au max 10 caractères.",
-    }),
-  prenom: z
-    .string()
-    .min(4, {
-      message: "Le prenom de doit contenir au moins 4 caractères.",
-    })
-    .max(10, {
-      message: "Le prenom doit contenir au max 10 caractères.",
-    }),
-  nomUtilisateur: z
-    .string()
-    .min(4, {
-      message: "Le nom d'utilisateur doit contenir au moins 4 caractères.",
-    })
-    .max(20, {
-      message: "Le nom d'utilisateur doit contenir au max 20 caractères.",
-    }),
-  motDePasse: z
-    .string()
-    .min(4, {
-      message: "Le nom d'utilisateur doit contenir au moins 4 caractères.",
-    })
-    .max(20, {
-      message: "Le nom d'utilisateur doit contenir au max 20 caractères.",
-    }),
-});
+import { inscriptionSchema } from "@/lib/schema";
 
 export const inscription = actionClient
-  .inputSchema(inputSchema)
+  .inputSchema(inscriptionSchema)
   .action(async ({ parsedInput }) => {
     const { nom, prenom, nomUtilisateur, motDePasse } = parsedInput;
 
