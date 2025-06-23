@@ -7,6 +7,7 @@ import Button from "@/components/Button";
 import { usePathname, useRouter } from "next/navigation";
 import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
+import ReseauxSocieau from "@/components/ReseauxSociau";
 
 export default function Login({ functionAction }) {
   const url = usePathname();
@@ -117,6 +118,16 @@ export default function Login({ functionAction }) {
           type={"submit"}
         />
       </form>
+      {url === "/login" && (
+        <>
+          <div className={style.diviseur}>
+            <hr />
+            <p>Ou</p>
+            <hr />
+          </div>
+          <ReseauxSocieau />
+        </>
+      )}
     </div>
   );
 }

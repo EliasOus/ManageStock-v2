@@ -34,7 +34,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .liens {
@@ -81,4 +81,27 @@
     color: rgb(190 2 2);
     font-size: .7rem;
     padding-left: 1.5rem;
+}
+
+.diviseur {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff69;
+    height: 2rem;
+    font-size: .8rem;
+    margin-bottom: 1.5rem;
+}
+
+.diviseur p {
+    margin: 0 1rem;
+    text-transform: lowercase;
+}
+
+.diviseur hr {
+    width: 45%;
+    margin: 0;
+    border: .5px solid #ffffff69;
 }

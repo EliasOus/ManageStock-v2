@@ -5,6 +5,15 @@ import NextAuth from "next-auth";
 
 const { auth: middleware } = NextAuth(authConfig);
 
+const dashboardPath = [
+  "/dashboard",
+  "/dashboard/recherche",
+  "/dashboard/receptions",
+  "/dashboard/retours",
+  "/dashboard/utilisateurs",
+  "/dashboard/inventaire",
+];
+
 export default middleware((req) => {
   const { nextUrl } = req;
   const path = nextUrl.pathname;
@@ -21,12 +30,12 @@ export default middleware((req) => {
   )
     return NextResponse.redirect(new URL("/dashboard", nextUrl));
 
-  if (path === "/dashboard" && !isConnecte)
+  if (dashboardPath.includes(path) && !isConnecte)
     return NextResponse.redirect(new URL("/", nextUrl));
 
   return NextResponse.next();
 });
 
 export const config = {
-  matcher: ["/login", "/inscription", "/dashboard", "/"],
+  matcher: ["/login", "/inscription", "/dashboard/:path*", "/"],
 };
