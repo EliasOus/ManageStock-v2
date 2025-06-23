@@ -12,7 +12,7 @@ import { useActionState, useState } from "react";
 export default function ContactezNous({ className }) {
   /**
    * Fonction de validation du formulaire de contact.
-   * Vérifie si tous les champs du formulaire (nom, courriel, téléphone, message, etc.)
+   * Vérifie si tous les champs du formulaire (name, courriel, téléphone, message, etc.)
    * sont remplis correctement et renvoie l'état mis à jour avec les erreurs correspondantes.
    *
    * - Si un champ est vide ou mal renseigné, un message d'erreur est ajouté.
@@ -28,7 +28,7 @@ export default function ContactezNous({ className }) {
    */
   
   const contactez = (previeousState, formData) => {
-    const nom = formData.get("nom");
+    const name = formData.get("name");
     const courriel = formData.get("courriel");
     const telephone = formData.get("telephone");
     const nomentreprise = formData.get("nomEntreprise");
@@ -36,7 +36,7 @@ export default function ContactezNous({ className }) {
     const message = formData.get("message");
 
     let newState = {
-      nom: { valeur: "", erreur: null },
+      name: { valeur: "", erreur: null },
       courriel: { valeur: "", erreur: null },
       telephone: { valeur: "", erreur: null },
       nomentreprise: { valeur: "", erreur: null },
@@ -45,9 +45,9 @@ export default function ContactezNous({ className }) {
     };
     let erreur = false;
 
-    if (!nom) {
+    if (!name) {
       erreur = true;
-      newState.nom.erreur = "Veuillez entrer votre nom";
+      newState.name.erreur = "Veuillez entrer votre name";
     }
     if (!courriel) {
       erreur = true;
@@ -81,7 +81,7 @@ export default function ContactezNous({ className }) {
     }
 
     if (erreur) {
-      newState.nom.valeur = nom;
+      newState.name.valeur = name;
       newState.courriel.valeur = courriel;
       newState.telephone.valeur = telephone;
       newState.nomentreprise.valeur = nomentreprise;
@@ -99,7 +99,7 @@ export default function ContactezNous({ className }) {
   };
 
   const [formState, formAction] = useActionState(contactez, {
-    nom: { valeur: "", erreur: null },
+    name: { valeur: "", erreur: null },
     courriel: { valeur: "", erreur: null },
     telephone: { valeur: "", erreur: null },
     nomentreprise: { valeur: "", erreur: null },
@@ -130,11 +130,11 @@ export default function ContactezNous({ className }) {
               Nom <span>*</span>
               <input
                 type="text"
-                name="nom"
-                defaultValue={formState.nom.valeur}
+                name="name"
+                defaultValue={formState.name.valeur}
                 required
               />
-              <div className={style.erreur}>{formState.nom.erreur}</div>
+              <div className={style.erreur}>{formState.name.erreur}</div>
             </label>
             <label>
               Email <span>*</span>

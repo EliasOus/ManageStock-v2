@@ -6,7 +6,7 @@ export async function rechercheProduits(query) {
   const produits = await prisma.produit.findMany({
     where: {
       OR: [
-        { nom: { contains: query, mode: "insensitive" } },
+        { name: { contains: query, mode: "insensitive" } },
         { sku: { contains: query, mode: "insensitive" } },
         { description: { contains: query, mode: "insensitive" } },
       ],
@@ -14,7 +14,7 @@ export async function rechercheProduits(query) {
     select: {
       id: true,
       sku: true,
-      nom: true,
+      name: true,
       fournisseur: true,
       quantite: true,
       prix: true,

@@ -10,7 +10,7 @@ import { commandeSchema } from "@/lib/schema";
 export const inputSafeCommande = actionClient
   .inputSchema(commandeSchema)
   .action(async ({ parsedInput }) => {
-    const { sku, nom, description, fournisseur, prix, quantite } = parsedInput;
+    const { sku, name, description, fournisseur, prix, quantite } = parsedInput;
 
     const numCommande = await generateUniqueCommandeNumber();
 
@@ -18,7 +18,7 @@ export const inputSafeCommande = actionClient
       data: {
         numeroDeCommande: numCommande,
         sku: sku,
-        nom: nom,
+        name: name,
         description: description,
         fournisseur: fournisseur,
         quantite: quantite,

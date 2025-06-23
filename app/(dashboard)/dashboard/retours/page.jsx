@@ -19,7 +19,7 @@ export default async function retours() {
       createdAt: true,
       commande: {
         select: {
-          nom: true,
+          name: true,
         },
       },
       quantite: true,

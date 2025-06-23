@@ -4,9 +4,6 @@ import { prisma } from "./lib/prisma";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import authConfig from "./auth.config";
 
-// import GitHub from "next-auth/providers/github";
-// import Google from "next-auth/providers/google";
-
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
@@ -16,8 +13,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.nom = user.nom;
-        token.prenom = user.prenom;
+        token.name = user.name;
         token.nomUtilisateur = user.nomUtilisateur;
         token.poste = user.poste;
       }
@@ -28,8 +24,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       if (token) {
         session.user = {
           id: token.id,
-          nom: token.nom,
-          prenom: token.prenom,
+          name: token.name,
           nomUtilisateur: token.nomUtilisateur,
           poste: token.poste,
         };

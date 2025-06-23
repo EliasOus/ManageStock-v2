@@ -7,7 +7,7 @@ import { inscriptionSchema } from "@/lib/schema";
 export const inscription = actionClient
   .inputSchema(inscriptionSchema)
   .action(async ({ parsedInput }) => {
-    const { nom, prenom, nomUtilisateur, motDePasse } = parsedInput;
+    const { email, name, nomUtilisateur, motDePasse } = parsedInput;
 
     const existingUser = await prisma.user.findUnique({
       where: { nomUtilisateur },
@@ -22,8 +22,8 @@ export const inscription = actionClient
 
     const newUser = await prisma.user.create({
       data: {
-        nom: nom,
-        prenom: prenom,
+        email: email,
+        name: name,
         nomUtilisateur: nomUtilisateur,
         motDePasse: mdpHash,
         poste: "GERANT",

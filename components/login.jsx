@@ -25,8 +25,8 @@ export default function Login({ functionAction }) {
       };
     } else {
       return {
-        nom: formData.get("nom"),
-        prenom: formData.get("prenom"),
+        email: formData.get("email"),
+        name: formData.get("name"),
         nomUtilisateur: formData.get("nomUtilisateur"),
         motDePasse: formData.get("motDePasse"),
       };
@@ -71,19 +71,22 @@ export default function Login({ functionAction }) {
           <label className={url === "/login" ? style.activeLogin : ""}>
             <input
               type="text"
-              name="nom"
+              name="email"
+              minLength={4}
+              maxLength={20}
+              required
+              placeholder="Email"
+            />
+          </label>
+          <label className={url === "/login" ? style.activeLogin : ""}>
+            <input
+              type="text"
+              name="name"
               minLength={3}
               maxLength={20}
               required
-              placeholder="Nom"
+              placeholder="nom complet"
             />
-            {/* <div className={style.erreur}>
-              {formState.nom.erreur}
-            </div> */}
-          </label>
-          <label className={url === "/login" ? style.activeLogin : ""}>
-            <input type="text" name="prenom" required placeholder="Prenom" />
-            {/* <div className={style.erreur}>{formState.prenom.erreur}</div> */}
           </label>
           <label>
             <input
@@ -94,9 +97,6 @@ export default function Login({ functionAction }) {
               required
               placeholder="Nom d'utilisateur"
             />
-            {/* <div className={style.erreur}>
-              {formState.nomUtilisateur.erreur}
-            </div> */}
           </label>
           <label>
             <input
@@ -107,7 +107,6 @@ export default function Login({ functionAction }) {
               required
               placeholder="Mot de Passe"
             />
-            {/* <div className={style.erreur}>{formState.motDePasse.erreur}</div> */}
           </label>
         </div>
         {erreur && <p className={style.erreur}>{erreur}</p>}

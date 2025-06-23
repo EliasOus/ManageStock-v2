@@ -7,8 +7,7 @@ import { inputSafeUtilisateur } from "@/actions/utilisateur-action";
 
 export default async function Utilisateur() {
   const inputFields = [
-    { name: "nom", placeholder: "Nom" },
-    { name: "prenom", placeholder: "Prenom" },
+    { name: "name", placeholder: "nom Complet" },
     { name: "nomUtilisateur", placeholder: "Nom D'utilisateur" },
     { name: "motDePasse", placeholder: "Mot De Passe" },
     { name: "poste", placeholder: "Poste" },
@@ -17,8 +16,7 @@ export default async function Utilisateur() {
   const utilisateurs = await prisma.user.findMany({
     select: {
       id: true,
-      nom: true,
-      prenom: true,
+      name: true,
       nomUtilisateur: true,
       motDePasse: true,
       poste: true,
@@ -41,7 +39,6 @@ export default async function Utilisateur() {
           defaultTitle={"Utilisateurs"}
           defaultHeaders={[
             "Nom",
-            "Prenom",
             "Nom utilisateur",
             "Mot de passe",
             "Poste",

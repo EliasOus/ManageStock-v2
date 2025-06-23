@@ -31,7 +31,7 @@ export default function SideBar({ session }) {
         <h2>bienvenue</h2>
         {session && (
           <p>
-            {session.user.nom} {session.user.prenom}
+            {session.user.name}
           </p>
         )}
       </div>

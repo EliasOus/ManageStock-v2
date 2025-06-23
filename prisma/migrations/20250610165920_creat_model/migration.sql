@@ -5,7 +5,6 @@ CREATE TYPE "Poste" AS ENUM ('GERANT', 'GESTIONNAIRE', 'TRAVAILLEUR');
 CREATE TABLE "Utilisateur" (
     "id" TEXT NOT NULL,
     "nom" TEXT NOT NULL,
-    "prenom" TEXT NOT NULL,
     "nomUtilisateur" TEXT NOT NULL,
     "motDePasse" TEXT NOT NULL,
     "poste" "Poste" NOT NULL,

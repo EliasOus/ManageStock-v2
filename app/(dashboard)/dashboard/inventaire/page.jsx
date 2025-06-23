@@ -8,7 +8,7 @@ import { inputSafeCommande } from "@/actions/commande-action";
 export default async function Inventaire() {
   const inputFields = [
     { name: "sku", type: "text", placeholder: "Entrez le Upe/Sku" },
-    { name: "nom", placeholder: "Entrez le nom de l'article" },
+    { name: "name", placeholder: "Entrez le nom de l'article" },
     { name: "description", placeholder: "Entrez la description" },
     { name: "fournisseur", placeholder: "Entrez le fournisseur" },
     { name: "prix", placeholder: "Entrez le Prix" },
@@ -20,7 +20,7 @@ export default async function Inventaire() {
       id: true,
       numeroDeCommande: true,
       sku: true,
-      nom: true,
+      name: true,
       fournisseur: true,
       quantite: true,
       prix: true,

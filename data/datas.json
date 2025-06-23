@@ -2,21 +2,18 @@
   "utilisateurs": [
     {
       "nom": "Dupont",
-      "prenom": "Jean",
       "nomUtilisateur": "jdupont",
       "motDePass": "123456",
       "poste": "Administrateur"
     },
     {
       "nom": "Martin",
-      "prenom": "Sophie",
       "nomUtilisateur": "smartin",
       "motDePass": "abcdef",
       "poste": "Gestionnaire"
     },
     {
       "nom": "Lemoine",
-      "prenom": "Paul",
       "nomUtilisateur": "plemoine",
       "motDePass": "paul123",
       "poste": "Utilisateur"

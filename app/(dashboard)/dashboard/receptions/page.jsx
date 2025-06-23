@@ -21,7 +21,7 @@ export default async function receptions() {
       commande: {
         select: {
           numeroDeCommande: true,
-          nom: true,
+          name: true,
         },
       },
       createdAt: true,

@@ -38,7 +38,6 @@ CREATE TABLE "accounts" (
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
     "nom" TEXT NOT NULL,
-    "prenom" TEXT NOT NULL,
     "nomUtilisateur" TEXT NOT NULL,
     "motDePasse" TEXT NOT NULL,
     "poste" "Poste" NOT NULL,

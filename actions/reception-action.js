@@ -61,7 +61,7 @@ export const inputSafeReception = actionClient
       await prisma.produit.create({
         data: {
           sku: commande.sku,
-          nom: commande.nom,
+          name: commande.name,
           description: commande.description,
           fournisseur: commande.fournisseur,
           quantite: quantite,

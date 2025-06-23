@@ -7,12 +7,11 @@ import { utilisateurSchema } from "@/lib/schema";
 export const inputSafeUtilisateur = actionClient
   .inputSchema(utilisateurSchema)
   .action(async ({ parsedInput }) => {
-    const { nom, prenom, nomUtilisateur, motDePasse, poste } = parsedInput;
+    const { name, nomUtilisateur, motDePasse, poste } = parsedInput;
 
     const newUtilisateur = await prisma.user.create({
       data: {
-        nom: nom,
-        prenom: prenom,
+        name: name,
         nomUtilisateur,
         nomUtilisateur,
         motDePasse: motDePasse,

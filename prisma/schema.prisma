@@ -16,7 +16,7 @@ enum Poste {
 model Produit {
   id          String       @id @default(cuid())
   sku         String?       @unique
-  nom         String?
+  name         String?
   description String?
   fournisseur String?
   quantite    Int
@@ -32,7 +32,7 @@ model Commande {
   id                String       @id @default(cuid())
   numeroDeCommande  String       @unique
   sku               String
-  nom               String
+  name               String
   description       String
   fournisseur       String
   quantite          Int
@@ -112,11 +112,12 @@ model Account {
 model User {
   id             String       @id @default(cuid())
   email          String?      @unique
-  nom            String
-  prenom         String
-  nomUtilisateur String       @unique
-  motDePasse     String
-  poste          Poste
+  name            String?
+  nomUtilisateur String?       @unique
+  motDePasse     String?
+  poste          Poste?
+  image          String?     
+  emailVerified  DateTime?
 
   commandes      Commande[]
   receptions     Reception[]

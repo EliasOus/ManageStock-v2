@@ -9,7 +9,7 @@ export default async function Recherche() {
     select: {
       id: true,
       sku: true,
-      nom: true,
+      name: true,
       fournisseur: true,
       quantite: true,
       prix: true,

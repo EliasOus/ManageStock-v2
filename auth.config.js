@@ -2,6 +2,8 @@ import { prisma } from "./lib/prisma";
 import { connexionSchema } from "./lib/schema";
 import Credentials from "next-auth/providers/credentials";
 import * as bcrypt from "bcryptjs";
+import GitHub from "next-auth/providers/github";
+// import Google from "next-auth/providers/google";
 
 const authConfig = {
   providers: [
@@ -27,8 +29,7 @@ const authConfig = {
           if (isMotDePasseMatch)
             return {
               id: user.id,
-              nom: user.nom,
-              prenom: user.prenom,
+              name: user.name,
               nomUtilisateur: user.nomUtilisateur,
               poste: user.poste,
             };
@@ -36,6 +37,10 @@ const authConfig = {
 
         return null;
       },
+    }),
+    GitHub({
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
   ],
 };

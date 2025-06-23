@@ -16,7 +16,7 @@ export default async function Dashboard() {
     select: {
       id: true,
       sku: true,
-      nom: true,
+      name: true,
       fournisseur: true,
       quantite: true,
       prix: true,
