@@ -54,7 +54,6 @@ export default function Login({ functionAction }) {
         action={async (formData) => {
           const data = newFormData(formData);
           const resultat = await executeAsync(data);
-          console.log(resultat);
           if (resultat.data.status === "error") {
             setErreur(resultat.data.message);
             return;

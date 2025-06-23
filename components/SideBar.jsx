@@ -10,6 +10,7 @@ import { BsBoxSeam } from "react-icons/bs";
 import { GiBoxUnpacking } from "react-icons/gi";
 import { MdOutlineInventory2, MdOutlineLogout } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
+import { deconnexion } from "@/actions/connexion-action";
 
 /**
  * Composant SideBar
@@ -24,14 +25,15 @@ export default function SideBar({ session }) {
   // Récupération du chemin actuel pour déterminer l'élément actif
   const url = usePathname();
 
-  // console.log(JSON.stringify(session));
   return (
     <div className={style.sideBar}>
       <div className={style.titre}>
         <h2>bienvenue</h2>
-        <p>
-          {session.user.nom} {session.user.prenom}
-        </p>
+        {session && (
+          <p>
+            {session.user.nom} {session.user.prenom}
+          </p>
+        )}
       </div>
 
       <nav>
@@ -153,10 +155,13 @@ export default function SideBar({ session }) {
             )}
           </li>
         </ul>
-        <div className={style.btnDeconexion}>
-          <MdOutlineLogout className={style.sideBarLogo} />
-          <Link href="/">Déconnexion</Link>
-        </div>
+        <form action={deconnexion}>
+          <button type="submit" className={style.btnDeconexion}>
+            <MdOutlineLogout className={style.sideBarLogo} />
+            Déconnexion
+          </button>
+        </form>
+        {/* <Link href="/">Déconnexion</Link> */}
       </nav>
     </div>
   );

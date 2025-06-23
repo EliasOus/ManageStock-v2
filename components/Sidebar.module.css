@@ -97,8 +97,17 @@
 }
 
 .btnDeconexion {
+    width: 100%;
     display: flex;
     justify-content: start;
     align-items: center;
     margin-left: 1rem;
+    background-color: transparent;
+    text-decoration: none;
+    color: #F5F6FA;
+    font-size: .8rem;
+    font-weight: 600;
+    padding: 0rem .5rem;
+    border: none;
+    cursor: pointer;
 }

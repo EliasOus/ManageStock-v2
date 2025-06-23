@@ -1,5 +1,5 @@
 "use server";
-import { signIn } from "@/auth";
+import { signIn, signOut } from "@/auth";
 import { actionClient } from "@/lib/safe-action-client";
 import { connexionSchema } from "@/lib/schema";
 import { AuthError } from "next-auth";
@@ -34,5 +34,9 @@ export const connexion = actionClient
       throw error;
     }
 
-    return { status: "success"};
+    return { status: "success" };
   });
+
+export const deconnexion = async () => {
+  await signOut();
+};
