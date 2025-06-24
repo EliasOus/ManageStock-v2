@@ -9,18 +9,22 @@ import { useAction } from "next-safe-action/hooks";
 import { useState } from "react";
 import ReseauxSocieau from "@/components/ReseauxSociau";
 
+import { IoIosArrowDropdownCircle } from "react-icons/io";
+import { MdError } from "react-icons/md";
+
 export default function Login({ functionAction }) {
   const url = usePathname();
   const router = useRouter();
 
   const [erreur, setErreur] = useState("");
+  const [success, setSuccess] = useState("");
 
   const { executeAsync, hasErrored } = useAction(functionAction);
 
   const newFormData = (formData) => {
     if (url === "/login") {
       return {
-        nomUtilisateur: formData.get("nomUtilisateur"),
+        email: formData.get("email"),
         motDePasse: formData.get("motDePasse"),
       };
     } else {
@@ -55,33 +59,44 @@ export default function Login({ functionAction }) {
         action={async (formData) => {
           const data = newFormData(formData);
           const resultat = await executeAsync(data);
-          if (resultat.validationErrors) {
+
+          console.log("*** elias *** " + JSON.stringify(resultat));
+          if (resultat.validationErrors || resultat.data.status === "error") {
             // Affiche l'erreur retournée par la Server Action
+            console.log("elias elias elias *****");
+            if (resultat.data) {
+              setSuccess("");
+              setErreur(resultat.data.message);
+              return;
+            }
             const erreur = Object.values(resultat.validationErrors)[0]
               ._errors[0];
+            setSuccess("");
             setErreur(erreur || "Erreur inconnue");
             return;
           }
-
-          if (resultat.data.status === "error") {
-            setErreur(resultat.data.message);
+          if (resultat.data.status === "success") {
+            console.log("fatima")
+            setErreur("");
+            setSuccess(resultat.data.message);
             return;
           }
 
           if (url === "/inscription") {
-            router.push("/login");
+            // router.push("/login");
+            setSuccess(resultat.data.message);
           }
         }}
         className={style.form}
         noValidate
       >
         <div className={style.inputs}>
-          <label className={url === "/login" ? style.activeLogin : ""}>
+          <label>
             <input
               type="text"
               name="email"
               minLength={4}
-              maxLength={20}
+              maxLength={50}
               required
               placeholder="Email"
             />
@@ -96,7 +111,7 @@ export default function Login({ functionAction }) {
               placeholder="nom complet"
             />
           </label>
-          <label>
+          <label className={url === "/login" ? style.activeLogin : ""}>
             <input
               type="text"
               name="nomUtilisateur"
@@ -117,7 +132,16 @@ export default function Login({ functionAction }) {
             />
           </label>
         </div>
-        {erreur && <p className={style.erreur}>{erreur}</p>}
+        {erreur && (
+          <div className={style.erreur}>
+            <MdError /> <p>{erreur}</p>
+          </div>
+        )}
+        {success && (
+          <div className={style.success}>
+            <IoIosArrowDropdownCircle /> <p>{success}</p>
+          </div>
+        )}
         <Button
           texte={url === "/login" ? "Se Connecter" : "S'inscrire"}
           active={true}

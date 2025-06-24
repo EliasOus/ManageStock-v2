@@ -3,32 +3,44 @@ import { prisma } from "@/lib/prisma";
 import { actionClient, safeActionError } from "@/lib/safe-action-client";
 import * as bcrypt from "bcryptjs";
 import { inscriptionSchema } from "@/lib/schema";
+import { generateVerificationToke } from "@/lib/generat-token";
 
 export const inscription = actionClient
   .inputSchema(inscriptionSchema)
   .action(async ({ parsedInput }) => {
     const { email, name, nomUtilisateur, motDePasse } = parsedInput;
+    try {
+      const existingUser = await prisma.user.findUnique({
+        where: { email },
+      });
 
-    const existingUser = await prisma.user.findUnique({
-      where: { nomUtilisateur },
-    });
+      if (existingUser) {
+        return {
+          status: "error",
+          message: "Ce nom d'utilisateur existe déjà.",
+        };
+      }
 
-    if (existingUser) {
+      const salt = await bcrypt.genSalt(10);
+      const mdpHash = await bcrypt.hash(motDePasse, salt);
+
+      const newUser = await prisma.user.create({
+        data: {
+          email: email,
+          name: name,
+          nomUtilisateur: nomUtilisateur,
+          motDePasse: mdpHash,
+          poste: "GERANT",
+        },
+      });
+
+      const verificationToken = generateVerificationToke(email);
+      return {
+        status: "success",
+        message: "Email de verification envoye, vérifiez votre email",
+      };
+    } catch (error) {
+      console.log(error);
       return { status: "error", message: "Ce nom d'utilisateur existe déjà." };
     }
-
-    const salt = await bcrypt.genSalt(10);
-    const mdpHash = await bcrypt.hash(motDePasse, salt);
-
-    const newUser = await prisma.user.create({
-      data: {
-        email: email,
-        name: name,
-        nomUtilisateur: nomUtilisateur,
-        motDePasse: mdpHash,
-        poste: "GERANT",
-      },
-    });
-
-    return { status: "success", data: newUser };
   });

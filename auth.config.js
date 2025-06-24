@@ -12,11 +12,12 @@ const authConfig = {
         const validation = connexionSchema.safeParse(data);
 
         if (validation.success) {
-          const { nomUtilisateur, motDePasse } = validation.data;
+          const { email, motDePasse } = validation.data;
 
+          console.log(email)
           const user = await prisma.user.findUnique({
             where: {
-              nomUtilisateur: nomUtilisateur,
+              email: email,
             },
           });
 
@@ -26,9 +27,11 @@ const authConfig = {
             motDePasse,
             user.motDePasse
           );
+          
           if (isMotDePasseMatch)
             return {
               id: user.id,
+              email: user.email,
               name: user.name,
               nomUtilisateur: user.nomUtilisateur,
               poste: user.poste,

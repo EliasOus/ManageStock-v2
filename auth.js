@@ -33,17 +33,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return session;
     },
+
+    async signIn({ user, account }) {
+      if (account.provider !== "credentials") return true;
+
+      const userDB = await prisma.user.findUnique({ where: { id: user.id } });
+      if (!userDB.emailVerified) return false;
+    },
   },
 
   events: {
     async linkAccount({ user }) {
-      console.log("elias **********/////***//*///*/**//**//*");
       await prisma.user.update({
         where: {
           id: user.id,
         },
         data: {
           emailVerified: new Date(),
+          poste: "GERANT",
         },
       });
     },

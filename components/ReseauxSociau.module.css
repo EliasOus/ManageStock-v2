@@ -21,9 +21,16 @@
     gap: 4rem;
     padding: .3rem;
     border: 1px solid #ffffff48;
-    border-radius: .2rem;
+    border-radius: .5rem 8px;
+    transition: transform 0.2s ease;
+    box-shadow: 3px 3px 13px -3px #ffffff4a;
 }
 
 .reseauxSociau svg {
     font-size: 1.5rem;
+}
+
+.google:hover,
+.github:hover {
+    transform: scale(1.005);
 }
