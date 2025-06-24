@@ -6,11 +6,14 @@ import generateUniqueCommandeNumber from "@/lib/unique-commande-number";
 import { z } from "zod";
 import { actionClient } from "@/lib/safe-action-client";
 import { commandeSchema } from "@/lib/schema";
+import { auth } from "@/auth";
 
 export const inputSafeCommande = actionClient
   .inputSchema(commandeSchema)
   .action(async ({ parsedInput }) => {
     const { sku, name, description, fournisseur, prix, quantite } = parsedInput;
+
+    const session = await auth();
 
     const numCommande = await generateUniqueCommandeNumber();
 
@@ -23,7 +26,7 @@ export const inputSafeCommande = actionClient
         fournisseur: fournisseur,
         quantite: quantite,
         prix: prix,
-        utilisateurId: "cmbzannxv00001g0u1lx2438u",
+        utilisateurId: session.user.id,
       },
     });
 

@@ -16,6 +16,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.name = user.name;
         token.nomUtilisateur = user.nomUtilisateur;
         token.poste = user.poste;
+        token.image = user.image;
       }
       return token;
     },
@@ -27,9 +28,24 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           name: token.name,
           nomUtilisateur: token.nomUtilisateur,
           poste: token.poste,
+          image: token.image,
         };
       }
       return session;
+    },
+  },
+
+  events: {
+    async linkAccount({ user }) {
+      console.log("elias **********/////***//*///*/**//**//*");
+      await prisma.user.update({
+        where: {
+          id: user.id,
+        },
+        data: {
+          emailVerified: new Date(),
+        },
+      });
     },
   },
 });

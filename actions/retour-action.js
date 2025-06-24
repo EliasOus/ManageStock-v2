@@ -1,4 +1,5 @@
 "use server";
+import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { actionClient } from "@/lib/safe-action-client";
 import { retourSchema } from "@/lib/schema";
@@ -44,11 +45,13 @@ export const inputSafeRetour = actionClient
       });
     }
 
+    const session = await auth();
+
     const newRetour = await prisma.retour.create({
       data: {
         numeroDeRetour: numRetour,
         commandeId: commande.id,
-        utilisateurId: "cmbzannxv00001g0u1lx2438u",
+        utilisateurId: session.user.id,
         quantite: quantite,
         motif: motif,
       },

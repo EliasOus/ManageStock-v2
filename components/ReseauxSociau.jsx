@@ -13,7 +13,7 @@ export default function ReseauxSociau() {
 
   return (
     <div className={style.reseauxSociau}>
-      <div className={style.google}>
+      <div onClick={() => socialLoginHandler("google")} className={style.google}>
         <FcGoogle />
         Continuer avec Google
       </div>

@@ -1,5 +1,6 @@
 "use server";
 
+import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { actionClient } from "@/lib/safe-action-client";
 import { recpetionSchema } from "@/lib/schema";
@@ -43,10 +44,12 @@ export const inputSafeReception = actionClient
       });
     }
 
+    const session = await auth();
+
     const newReception = await prisma.reception.create({
       data: {
         commandeId: commande.id,
-        utilisateurId: "cmbzannxv00001g0u1lx2438u",
+        utilisateurId: session.user.id,
         quantite: quantite,
       },
     });

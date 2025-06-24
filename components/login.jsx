@@ -55,6 +55,14 @@ export default function Login({ functionAction }) {
         action={async (formData) => {
           const data = newFormData(formData);
           const resultat = await executeAsync(data);
+          if (resultat.validationErrors) {
+            // Affiche l'erreur retournée par la Server Action
+            const erreur = Object.values(resultat.validationErrors)[0]
+              ._errors[0];
+            setErreur(erreur || "Erreur inconnue");
+            return;
+          }
+
           if (resultat.data.status === "error") {
             setErreur(resultat.data.message);
             return;
