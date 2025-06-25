@@ -1,6 +1,7 @@
 "use server";
 import { signIn, signOut } from "@/auth";
 import { generateVerificationToke } from "@/lib/generat-token";
+import { sendVerificationEmail } from "@/lib/mailer";
 import { prisma } from "@/lib/prisma";
 import { actionClient } from "@/lib/safe-action-client";
 import { connexionSchema } from "@/lib/schema";
@@ -17,13 +18,21 @@ export const connexion = actionClient
     if (!user || !user.email || !user.motDePasse)
       return { status: "error", message: "utilisateur Invalide" };
 
+    console.log(!user.emailVerified)
+    if (!user.emailVerified) {
+      const verificationToken = await generateVerificationToke(email);
+      await sendVerificationEmail(
+        verificationToken.email,
+        verificationToken.token
+      );
+    }
+
     try {
       await signIn("credentials", {
         email,
         motDePasse,
         redirectTo: "/dashboard",
       });
-    
     } catch (error) {
       if (error instanceof AuthError) {
         switch (error.type) {

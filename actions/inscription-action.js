@@ -4,6 +4,7 @@ import { actionClient, safeActionError } from "@/lib/safe-action-client";
 import * as bcrypt from "bcryptjs";
 import { inscriptionSchema } from "@/lib/schema";
 import { generateVerificationToke } from "@/lib/generat-token";
+import { sendVerificationEmail } from "@/lib/mailer";
 
 export const inscription = actionClient
   .inputSchema(inscriptionSchema)
@@ -33,14 +34,15 @@ export const inscription = actionClient
           poste: "GERANT",
         },
       });
-
-      const verificationToken = generateVerificationToke(email);
+      
+      const verificationToken = await generateVerificationToke(email);
+      await sendVerificationEmail(verificationToken.email, verificationToken.token);
       return {
         status: "success",
         message: "Email de verification envoye, vérifiez votre email",
       };
     } catch (error) {
-      console.log(error);
+      console.log(error + "898998");
       return { status: "error", message: "Ce nom d'utilisateur existe déjà." };
     }
   });
