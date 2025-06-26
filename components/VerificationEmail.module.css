@@ -1,0 +1,25 @@
+.contenerEmail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1.5rem 0rem;
+    gap: 1rem;
+}
+
+.contenerEmail h2 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.contenerEmail svg {
+    font-size: 6rem;
+}
+
+.contenerEmail p {
+    font-weight: 100;
+    font-size: .8rem;
+    text-align: center;
+    margin: 0 2rem;
+}
