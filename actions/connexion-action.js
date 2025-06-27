@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { actionClient } from "@/lib/safe-action-client";
 import { connexionSchema } from "@/lib/schema";
 import { AuthError } from "next-auth";
+import * as bcrypt from "bcryptjs";
 
 export const connexion = actionClient
   .inputSchema(connexionSchema)
@@ -18,13 +19,23 @@ export const connexion = actionClient
     if (!user || !user.email || !user.motDePasse)
       return { status: "error", message: "utilisateur Invalide" };
 
-    console.log(!user.emailVerified)
+    const isMotDePasseMatch = await bcrypt.compare(motDePasse, user.motDePasse);
+    if (!isMotDePasseMatch) {
+      return { status: "error", message: "Utilisateur ou mot de passe invalide." };
+    }
+
+    console.log(!user.emailVerified);
     if (!user.emailVerified) {
       const verificationToken = await generateVerificationToke(email);
       await sendVerificationEmail(
         verificationToken.email,
         verificationToken.token
       );
+
+      return {
+        status: "success",
+        message: "Veuillez vérifier votre email pour vous connecter.",
+      };
     }
 
     try {
@@ -41,12 +52,6 @@ export const connexion = actionClient
               status: "error",
               message: "Nom d'utilisateur ou le Mote De Passe Invalide",
             };
-          case "AccessDenied":
-            return {
-              status: "success",
-              message: "Veuillez vérifier votre email pour vous connecter.",
-            };
-
           default:
             return {
               status: "error",

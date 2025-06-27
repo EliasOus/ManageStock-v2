@@ -27,7 +27,7 @@ const authConfig = {
             motDePasse,
             user.motDePasse
           );
-          
+          console.log("/*////* " + isMotDePasseMatch)
           if (isMotDePasseMatch)
             return {
               id: user.id,
@@ -38,7 +38,7 @@ const authConfig = {
             };
         }
 
-        return null;
+        return false;
       },
     }),
     GitHub({

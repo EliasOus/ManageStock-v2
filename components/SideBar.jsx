@@ -132,7 +132,7 @@ export default function SideBar({ session }) {
               </div>
             )}
           </li>
-          <li>
+          {/* <li>
             {url === "/dashboard/utilisateurs" ? (
               <div className={style.selection}>
                 <span className={style.circleH}></span>
@@ -153,7 +153,7 @@ export default function SideBar({ session }) {
                 </Link>
               </div>
             )}
-          </li>
+          </li> */}
         </ul>
         <form action={deconnexion}>
           <button type="submit" className={style.btnDeconexion}>
