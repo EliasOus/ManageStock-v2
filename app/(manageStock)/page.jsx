@@ -14,12 +14,11 @@ import imgChart from "@/public/chart-img.png";
 import imgIdentifier from "@/public/identifiez-img.jpg";
 import imgSuivez from "@/public/suivez-img.png";
 import logoWhite from "@/public/Logo-White.png";
-import { prisma } from "@/lib/prisma";
-
 
 export default function Home() {
   return (
     <>
+      
       <div className={styles.sectionBanner} id="Accueil">
         <Image src={banner} alt={"banner de la page d'accueil"} quality={100} />
         <div className={styles.hook}>

@@ -1,0 +1,71 @@
+.pageMobile {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fafafa;
+  color: #222;
+  text-align: center;
+  padding: 0 1.5rem;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.pageMobile svg{
+    font-size: 2em;
+}
+
+.titre {
+  font-weight: 700;
+  font-size: 1.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.message {
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #555;
+}
+
+.boutons {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.bouton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #222;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 2px solid #222;
+  border-radius: 9999px; /* pill shape */
+  padding: 0.6rem 1.4rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.bouton:hover {
+  background-color: #222;
+  color: #fafafa;
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 400px) {
+  .boutons {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .bouton {
+    justify-content: center;
+  }
+}

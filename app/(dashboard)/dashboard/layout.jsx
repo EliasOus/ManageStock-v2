@@ -9,6 +9,8 @@ import { Inter } from "next/font/google";
 import SideBar from "@/components/SideBar";
 import { auth } from "@/auth";
 
+import MobilBlocker from "@/components/MobilBlocker";
+
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "900", "700", "800", "500"],
@@ -23,16 +25,17 @@ export const metadata = {
 };
 
 export default async function DashboardLayout({ children }) {
-    const session = await auth();
-        console.log(session)
+  const session = await auth();
+  console.log(session);
   return (
     <html lang="fr" className={`${inter.variable}`}>
       <body className={style.body}>
+        <MobilBlocker />
         <div className={style.bar}>
           <Image src={logo} alt="logo de ManageStock" />
         </div>
         <main className={style.main}>{children}</main>
-        <SideBar session={session}/>
+        <SideBar session={session} />
       </body>
     </html>
   );
