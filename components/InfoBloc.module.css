@@ -1,53 +1,68 @@
 .infoBloc {
- background-color: white;
- padding: 20px;
- border-radius: 10px;
- box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
- width: 90%;
- margin: auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  margin: auto;
 }
 
 .tableTitle {
- font-size: 20px;
- font-weight: bold;
- margin-bottom: 20px;
- border-bottom: solid darkorange 4px;
- width: 30%;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-bottom: solid darkorange 4px;
+  width: 30%;
 }
 
 .infoTable {
- width: 100%;
- border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .infoTable th {
- background-color: #e8e8e8;
- padding: 10px;
- text-align: left;
- word-wrap: break-word;
- white-space: normal;
+  background-color: #e8e8e8;
+  padding: 10px;
+  text-align: left;
+  word-wrap: break-word;
+  white-space: normal;
 }
 
 .infoTable td {
- padding: 10px;
- border-top: 1px solid #ddd;
+  padding: 10px;
+  border-top: 1px solid #ddd;
 }
 
 .noData {
- text-align: center;
- color: #888;
- font-style: italic;
+  text-align: center;
+  color: #888;
+  font-style: italic;
 }
 
-.btnDelete{
-    background-color: transparent;
-    border: none;
-    font-size: 2rem;
-    color: red;
-    cursor: pointer;
+.btnDelete {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  color: red;
+  cursor: pointer;
 }
 
 .btnDelete:hover {
   transform: rotate(10deg) scale(1.20);
   transition: transform 0.2s ease-in-out;
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+.tableWrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.tableWrapper::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
 }

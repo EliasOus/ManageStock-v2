@@ -6,6 +6,19 @@
 }
 
 .inputform {
-    padding-left: 8rem;
-    padding-bottom: 12px;
+    margin-bottom: 1rem;
+    padding-left: 1rem;
+}
+
+.contenaire {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.tableWrapper {
+  overflow-x: auto;
+  width: 100%;
 }

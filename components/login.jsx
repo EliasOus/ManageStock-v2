@@ -76,7 +76,7 @@ export default function Login({ functionAction }) {
             return;
           }
           if (resultat.data.status === "success") {
-            console.log("fatima")
+            console.log("fatima");
             setErreur("");
             setSuccess(resultat.data.message);
             return;
@@ -149,16 +149,12 @@ export default function Login({ functionAction }) {
           type={"submit"}
         />
       </form>
-      {url === "/login" && (
-        <>
-          <div className={style.diviseur}>
-            <hr />
-            <p>Ou</p>
-            <hr />
-          </div>
-          <ReseauxSocieau />
-        </>
-      )}
+      <div className={style.diviseur}>
+        <hr />
+        <p>Ou</p>
+        <hr />
+      </div>
+      <ReseauxSocieau />
     </div>
   );
 }

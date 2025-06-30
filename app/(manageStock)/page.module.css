@@ -74,7 +74,7 @@
     align-items: center;
     justify-content: space-between;
     background-color: #221E34;
-    padding: 3rem 15rem;
+    padding: 2rem 12rem;
     height: 15rem;
 }
 
@@ -85,19 +85,23 @@
 }
 
 .bannerAporpo h3 {
-    color: white;
+    color: #ffffffba;
     text-align: justify;
     width: 50%;
-    font-size: 1.3rem;
+    font-size: 1rem;
+    font-weight: 500;
     margin: 0;
+    line-height: 1.8;
 }
-.sectionFaq{
+
+.sectionFaq {
     margin-bottom: 6rem;
 }
-.questions{
+
+.questions {
     margin-top: 3rem;
 }
 
-.questions p{
+.questions p {
     text-align: left !important;
 }

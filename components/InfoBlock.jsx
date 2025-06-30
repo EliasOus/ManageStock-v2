@@ -41,44 +41,46 @@ export default function InfoBloc({ defaultTitle, defaultHeaders, data = [] }) {
   return (
     <div className={style.infoBloc}>
       <h2 className={style.tableTitle}>{defaultTitle}</h2>
-      <table className={style.infoTable}>
-        <thead>
-          <tr>
-            {defaultHeaders.map((header, index) => (
-              <th key={index}>{header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.length > 0 ? (
-            data.map((item, index) => (
-              <tr key={index}>
-                {keys.map((key) => (
-                  <td key={key}>{item[key]}</td>
-                ))}
-                <td>
-                  {isDeleteMode ? (
-                    <button
-                      className={style.btnDelete}
-                      onClick={() => {
-                        handleDelete(item.id);
-                      }}
-                    >
-                      <MdDeleteForever />
-                    </button>
-                  ) : null}
+      <div className={style.tableWrapper}>
+        <table className={style.infoTable}>
+          <thead>
+            <tr>
+              {defaultHeaders.map((header, index) => (
+                <th key={index}>{header}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.length > 0 ? (
+              data.map((item, index) => (
+                <tr key={index}>
+                  {keys.map((key) => (
+                    <td key={key}>{item[key]}</td>
+                  ))}
+                  <td>
+                    {isDeleteMode ? (
+                      <button
+                        className={style.btnDelete}
+                        onClick={() => {
+                          handleDelete(item.id);
+                        }}
+                      >
+                        <MdDeleteForever />
+                      </button>
+                    ) : null}
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={defaultHeaders.length} className={style.noData}>
+                  Aucune donnée disponible
                 </td>
               </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan={defaultHeaders.length} className={style.noData}>
-                Aucune donnée disponible
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

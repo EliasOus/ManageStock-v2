@@ -35,9 +35,9 @@ export default async function receptions() {
   });
 
   const receptionsFormater = formaterData(receptions);
-
+  
   return (
-    <>
+    <div className={style.contenaire}>
       <h1 className={style.titre}>Gestion des Réceptions</h1>
       <div className={style.inputform}>
         <InputForm
@@ -45,7 +45,6 @@ export default async function receptions() {
           ActionFunction={inputSafeReception}
         />
       </div>
-      <div>
         <InfoBloc
           dataType={"reception"}
           defaultTitle={"Réceptions"}
@@ -58,7 +57,6 @@ export default async function receptions() {
           ]}
           data={receptionsFormater}
         />
-      </div>
-    </>
+    </div>
   );
 }

@@ -26,15 +26,15 @@
 .sideBar a {
     text-decoration: none;
     color: #F5F6FA;
-    font-size: .7rem;
+    font-size: .65rem;
     font-weight: 600;
     padding: 0rem .5rem;
     z-index: 10;
 }
 
 .sideBarLogo {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.4rem;
+    height: 1.4rem;
     color: #F5F6FA;
 
 }

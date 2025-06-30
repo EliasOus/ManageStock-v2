@@ -1,15 +1,17 @@
-
-.maDiv1 {
-    width: 80%;
-    margin: 50px auto 0;
+.contenaire {
+    width: 90%;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
 }
 
-.madiv2{
-    margin: 80px auto;
+.contenaire div {
+    width: 100%;
 }
-.maDiv3 {
-    /* width: 80%; */
-    margin: 0 auto ;
+
+.carteInfo {
+    display: flex;
+    justify-content: space-evenly;
 }

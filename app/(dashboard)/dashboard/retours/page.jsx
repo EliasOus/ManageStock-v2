@@ -31,13 +31,10 @@ export default async function retours() {
   const retoursFormater = formaterData(retours);
 
   return (
-    <>
+    <div className={style.contenaire}>
       <h1 className={style.titre}>Gestion des Retours</h1>
       <div className={style.inputform}>
-        <InputForm
-          inputFields={inputFields}
-          ActionFunction={inputSafeRetour}
-        />
+        <InputForm inputFields={inputFields} ActionFunction={inputSafeRetour} />
       </div>
       <div>
         <InfoBloc
@@ -54,6 +51,6 @@ export default async function retours() {
           data={retoursFormater}
         />
       </div>
-    </>
+    </div>
   );
 }

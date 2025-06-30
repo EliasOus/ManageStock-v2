@@ -34,7 +34,7 @@ export default async function Inventaire() {
   const commandesFormater = await formaterData(commandes);
 
   return (
-    <>
+    <div className={style.contenaire}>
       <h1 className={style.titre}>Articles & Inventaire</h1>
       <div className={style.inputform}>
         <InputForm
@@ -59,6 +59,6 @@ export default async function Inventaire() {
           data={commandesFormater}
         />
       </div>
-    </>
+    </div>
   );
 }

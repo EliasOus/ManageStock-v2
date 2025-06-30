@@ -32,13 +32,46 @@ export default async function Dashboard() {
   const nmbProduit = nbrProduitsEnStock();
   const nmbCommande = nbrCommandeEnStock();
   const valeurStock = ValeurTotaleStock();
-  
+
   const nbrProduitsReaprosisionner = produitsReaprosisionner.length;
 
   return (
-    <>
-      {/* <h1>dashboard page bonjour</h1> */}
-      <div className={styles.maDiv1}>
+    // <>
+    //   <div className={styles.maDiv1}>
+    //     <CarteInfo
+    //       chiffre={valeurStock}
+    //       titre={"Valeur totale du stock"}
+    //     ></CarteInfo>
+    //     <CarteInfo
+    //       chiffre={nmbCommande}
+    //       titre={"Commande en cours"}
+    //     ></CarteInfo>
+    //     <CarteInfo chiffre={nmbProduit} titre={"Produits en stock"}></CarteInfo>
+    //     <CarteInfo
+    //       chiffre={nbrProduitsReaprosisionner}
+    //       titre={"Produits a reaprovisionner"}
+    //     ></CarteInfo>
+    //   </div>
+    //   <div className={styles.madiv2}>
+    //     <Chart></Chart>
+    //   </div>
+    //   <div className={styles.maDiv3}>
+    //     <InfoBloc
+    //       dataType={"produit"}
+    //       defaultTitle={"Produits a reaprovisionner"}
+    //       defaultHeaders={[
+    //         "Upe/Sku",
+    //         "Nom d’article",
+    //         "Fournisseur",
+    //         "Quantité",
+    //         "Prix",
+    //       ]}
+    //       data={produitsReapFormater}
+    //     ></InfoBloc>
+    //   </div>
+    // </>
+    <div className={styles.contenaire}>
+      <div className={styles.carteInfo}>
         <CarteInfo
           chiffre={valeurStock}
           titre={"Valeur totale du stock"}
@@ -53,23 +86,19 @@ export default async function Dashboard() {
           titre={"Produits a reaprovisionner"}
         ></CarteInfo>
       </div>
-      <div className={styles.madiv2}>
-        <Chart></Chart>
-      </div>
-      <div className={styles.maDiv3}>
-        <InfoBloc
-          dataType={"produit"}
-          defaultTitle={"Produits a reaprovisionner"}
-          defaultHeaders={[
-            "Upe/Sku",
-            "Nom d’article",
-            "Fournisseur",
-            "Quantité",
-            "Prix",
-          ]}
-          data={produitsReapFormater}
-        ></InfoBloc>
-      </div>
-    </>
+      <Chart></Chart>
+      <InfoBloc
+        dataType={"produit"}
+        defaultTitle={"Produits a reaprovisionner"}
+        defaultHeaders={[
+          "Upe/Sku",
+          "Nom d’article",
+          "Fournisseur",
+          "Quantité",
+          "Prix",
+        ]}
+        data={produitsReapFormater}
+      ></InfoBloc>
+    </div>
   );
 }

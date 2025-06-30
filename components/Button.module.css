@@ -13,10 +13,16 @@
 
 
 .button:hover {
-  background-color: #ffb623;
+  /* background-color: #ffb623; */
+  color: #ffb623;
 }
 
 .active {
   background-color: #ffb623;
   color: black;
+  transition: transform 0.5s ease;
+}
+.active:hover{
+  color: black;
+  transform: scale(1.02)
 }

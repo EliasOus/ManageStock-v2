@@ -1,7 +1,5 @@
 .contenaire {
-    position: relative;
-    width: 90%;
-    margin: 0 auto;
+    width: 100%;
 }
 
 .contenaire input {

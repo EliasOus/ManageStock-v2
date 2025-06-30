@@ -5,7 +5,7 @@
     background-color: #221E34;
     padding: 40px 100px;
     gap: 30px;
-    color: white;
+    color: #ffffffba;
 }
 
 .Image {
@@ -36,7 +36,7 @@
 }
 
 .liens a {
-    color: white;
+    color: #ffffffba;
 }
 
 .footer div {
