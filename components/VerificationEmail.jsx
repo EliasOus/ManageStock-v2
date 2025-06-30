@@ -12,7 +12,6 @@ import Button from "./Button";
 export default function VerificationEmail() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
-  console.log(token);
 
   const [status, setStatus] = useState("loading");
   const [message, setMessage] = useState("");

@@ -35,7 +35,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
 
     async signIn({ user, account }) {
-      console.log("fatima " + account.provider);
       if (account.provider !== "credentials") return true;
       return true
     },

@@ -60,10 +60,8 @@ export default function Login({ functionAction }) {
           const data = newFormData(formData);
           const resultat = await executeAsync(data);
 
-          console.log("*** elias *** " + JSON.stringify(resultat));
           if (resultat.validationErrors || resultat.data.status === "error") {
             // Affiche l'erreur retournée par la Server Action
-            console.log("elias elias elias *****");
             if (resultat.data) {
               setSuccess("");
               setErreur(resultat.data.message);
@@ -76,7 +74,6 @@ export default function Login({ functionAction }) {
             return;
           }
           if (resultat.data.status === "success") {
-            console.log("fatima");
             setErreur("");
             setSuccess(resultat.data.message);
             return;
@@ -91,6 +88,12 @@ export default function Login({ functionAction }) {
         noValidate
       >
         <div className={style.inputs}>
+          {url === "/login" && (
+            <div className={style.userTest}>
+              <h1>Pour tester, utilise : </h1>
+              <p>Email : test@gmail.com | mot de passe : test1234</p>
+            </div>
+          )}
           <label>
             <input
               type="text"

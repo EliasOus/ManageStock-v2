@@ -148,3 +148,20 @@
     margin: 0;
     border: .5px solid #ffffff69;
 }
+
+.userTest {
+    color: #ffffffa3;
+    padding: 0;
+    margin: 0;
+}
+
+.userTest h1 {
+    font-size: .8em;
+    font-weight: 600;
+    margin: 0;
+}
+
+.userTest p {
+    font-size: .6em;
+    margin: .3rem 0 0 0;
+}

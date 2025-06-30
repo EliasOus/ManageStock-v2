@@ -42,7 +42,7 @@ export const inscription = actionClient
         message: "Email de verification envoye, vérifiez votre email",
       };
     } catch (error) {
-      console.log(error + "898998");
+      console.log(error);
       return { status: "error", message: "Ce nom d'utilisateur existe déjà." };
     }
   });

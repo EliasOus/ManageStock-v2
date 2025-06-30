@@ -15,7 +15,6 @@ export const connexion = actionClient
     const { email, motDePasse } = parsedInput;
 
     const user = await prisma.user.findUnique({ where: { email } });
-    console.log(JSON.stringify(user));
     if (!user || !user.email || !user.motDePasse)
       return { status: "error", message: "utilisateur Invalide" };
 
@@ -24,7 +23,6 @@ export const connexion = actionClient
       return { status: "error", message: "Utilisateur ou mot de passe invalide." };
     }
 
-    console.log(!user.emailVerified);
     if (!user.emailVerified) {
       const verificationToken = await generateVerificationToke(email);
       await sendVerificationEmail(

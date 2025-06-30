@@ -14,7 +14,6 @@ const authConfig = {
         if (validation.success) {
           const { email, motDePasse } = validation.data;
 
-          console.log(email)
           const user = await prisma.user.findUnique({
             where: {
               email: email,
@@ -27,7 +26,6 @@ const authConfig = {
             motDePasse,
             user.motDePasse
           );
-          console.log("/*////* " + isMotDePasseMatch)
           if (isMotDePasseMatch)
             return {
               id: user.id,

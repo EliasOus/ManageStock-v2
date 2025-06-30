@@ -20,10 +20,6 @@ export default middleware((req) => {
 
   const isConnecte = Boolean(req.auth);
 
-  console.log("🚦 middleware path:", path);
-  console.log("🔐 session:", req.auth);
-  console.log("✅ isConnecte:", Boolean(req.auth));
-
   if (
     (path === "/login" || path === "/inscription" || path === "/") &&
     isConnecte

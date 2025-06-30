@@ -14,10 +14,6 @@ export default async function contactezServeur(valideData) {
     emailObjet: emailObjet,
     emailMessage: emailMessage,
   };
-  console.log(
-    "email emnvoye super ****************** " +
-      JSON.stringify(validedata, null, 2)
-  );
   await sendEmail(validedata);
   redirect("/contactez-nous/succes");
 }

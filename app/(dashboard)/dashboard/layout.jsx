@@ -26,7 +26,6 @@ export const metadata = {
 
 export default async function DashboardLayout({ children }) {
   const session = await auth();
-  console.log(session);
   return (
     <html lang="fr" className={`${inter.variable}`}>
       <body className={style.body}>
