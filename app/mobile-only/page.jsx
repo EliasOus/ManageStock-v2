@@ -1,6 +1,7 @@
 import MobilBlocker from "@/components/MobilBlocker";
 import styles from "./page.module.css";
 import { FaApple } from "react-icons/fa";
+import Image from "next/image";
 
 export default function PageMobileOnly() {
   return (
@@ -8,7 +9,7 @@ export default function PageMobileOnly() {
       <MobilBlocker />
       <main className={styles.pageMobile}>
         <h1 className={styles.titre}>
-          Ce site n'est pas disponible en version mobile
+          {"Ce site n'est pas disponible en version mobile"}
         </h1>
         <p className={styles.message}>
           Pour continuer, veuillez télécharger notre application mobile.
@@ -21,10 +22,12 @@ export default function PageMobileOnly() {
             className={styles.bouton}
             aria-label="Télécharger sur Google Play"
           >
-            <img
+            <Image
               src="/google-play-store.png"
               alt="Logo Google Play"
               className={styles.logo}
+              width={500}
+              height={500}
             />
             Google Play
           </a>
@@ -35,11 +38,6 @@ export default function PageMobileOnly() {
             className={styles.bouton}
             aria-label="Télécharger sur App Store"
           >
-            {/* <img
-              src="/appstore-logo.png"
-              alt="Logo App Store"
-              className={styles.logo}
-            /> */}
             <FaApple />
             App Store
           </a>

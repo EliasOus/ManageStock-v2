@@ -26,7 +26,7 @@ export default async function Utilisateur() {
   const utilisateursFormater = formaterData(utilisateurs);
   return (
     <>
-      <h1 className={style.titre}>Gestion d'utilisateur</h1>
+      <h1 className={style.titre}>{"Gestion d'utilisateur"}</h1>
       <div className={style.inputform}>
         <InputForm
           inputFields={inputFields}

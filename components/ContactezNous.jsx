@@ -65,7 +65,7 @@ export default function ContactezNous() {
               />
             </label>
             <label>
-              Nom de l'entreprise
+              {"Nom de l'entreprise"}
               <input type="text" name="nomEntreprise" />
             </label>
           </div>

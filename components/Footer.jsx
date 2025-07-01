@@ -7,7 +7,7 @@ import whatsapp from "@/public/whatsapp.svg";
 import style from "./Footer.module.css";
 import Link from "next/link";
 
-export default function () {
+export default function Footer() {
   return (
     <footer>
       <div className={style.footer}>

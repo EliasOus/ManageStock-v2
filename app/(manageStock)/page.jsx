@@ -18,7 +18,6 @@ import logoWhite from "@/public/Logo-White.png";
 export default function Home() {
   return (
     <>
-      
       <div className={styles.sectionBanner} id="Accueil">
         <Image src={banner} alt={"banner de la page d'accueil"} quality={100} />
         <div className={styles.hook}>
@@ -26,10 +25,9 @@ export default function Home() {
             Augmentez vos ventes grâce à des analyses de données puissantes
           </h1>
           <h3>
-            Comprenez le potentiel des analyses de ventes pour améliorer les
-            performances de votre équipe et atteindre vos objectifs de revenus.
-            Un aperçu concis des métriques de vente pour suivre les progrès et
-            identifier les axes d'amélioration.
+            {
+              "Comprenez le potentiel des analyses de ventes pour améliorer les performances de votre équipe et atteindre vos objectifs de revenus. Un aperçu concis des métriques de vente pour suivre les progrès et identifier les axes d'amélioration."
+            }
           </h3>
           {/* <div onClick={goToLogin}> */}
           <Button
@@ -100,10 +98,9 @@ export default function Home() {
         <h1>Qui sommes-nous ?</h1>
         <div className={styles.bannerAporpo}>
           <h3>
-            Notre application est conçue pour simplifier la gestion des
-            entreprises avec des solutions modernes et intuitives. Notre mission
-            est d'aider nos clients à optimiser leurs performances et à
-            atteindre leurs objectifs en toute simplicité.
+            {
+              "Notre application est conçue pour simplifier la gestion des entreprises avec des solutions modernes et intuitives. Notre mission est d'aider nos clients à optimiser leurs performances et à atteindre leurs objectifs en toute simplicité."
+            }
           </h3>
           <Image src={logoWhite} alt={"logo managestock white"} />
         </div>
