@@ -5,7 +5,9 @@ export default function VerificationPage() {
 
   return (
     <div className={style.contener}>
-      <VerificationEmail />
+      <Suspense fallback={<div>Chargement...</div>}>
+        <VerificationEmail />
+      </Suspense>
     </div>
   );
 }
