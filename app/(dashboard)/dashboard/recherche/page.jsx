@@ -1,4 +1,4 @@
-import RechercheWrap from "@/components/rechercheWrap";
+import RechercheWrap from "@/components/RechercheWrap";
 import styles from "./page.module.css";
 
 import { prisma } from "@/lib/prisma";

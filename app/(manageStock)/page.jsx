@@ -1,6 +1,6 @@
 import styles from "./page.module.css";
 import Image from "next/image";
-import banner from "@/public/banner.png";
+import banner from "@/public/Banner.png";
 import Button from "@/components/Button";
 import SectionEntreprises from "@/components/SectionEntreprise";
 import AvantagePlateforme from "@/components/AvantagePlateforme";
