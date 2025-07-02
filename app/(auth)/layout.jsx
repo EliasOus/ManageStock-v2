@@ -5,6 +5,7 @@ import style from "./layout.module.css";
 import "@/app/globals.css";
 
 import { Inter } from "next/font/google";
+import MobilBlocker from "@/components/MobilBlocker";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function LoginLayout({ children }) {
   return (
     <html lang="fr" className={`${inter.variable}`}>
       <body className={style.body}>
+        <MobilBlocker />
         <Header />
         <main className={style.main}>{children}</main>
       </body>
