@@ -5,6 +5,8 @@
 ManageStock est une plateforme web destinée à améliorer la gestion d'inventaire des petites et moyennes entreprises (PME).  
 Ce dépôt contient la version complète et fonctionnelle du projet avec la partie front-end initiale développée en équipe, enrichie et finalisée par mes soins avec un back-end complet et des fonctionnalités avancées.
 
+🔗 **Démo en ligne** : [https://manage-stock-v2.vercel.app](https://manage-stock-v2.vercel.app)
+
 ## Historique du projet
 
 Le projet a débuté avec une équipe qui a réalisé la partie front-end uniquement ( disponible ici : [ManageStock](https://github.com/EliasOus/ManageStock) ).  
