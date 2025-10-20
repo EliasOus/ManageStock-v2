@@ -1,9 +1,9 @@
-name: Deploy Next.js + Prisma
+name: Deploy Next.js + Prisma + Seed
 
 on:
   push:
     branches:
-      - main  # ou ta branche principale
+      - main  # Branche à surveiller
 
 jobs:
   deploy:
@@ -24,11 +24,22 @@ jobs:
       # 4. Générer Prisma
       - run: npx prisma generate
 
-      # 5. Appliquer migrations + seed
+      # 5. Appliquer migrations et seed
       - name: Apply migrations and seed
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-        run: npm run db:deploy
+        run: |
+          # Débloquer les verrous si nécessaire
+          npx prisma db execute --url $DATABASE_URL --sql "SELECT pg_advisory_unlock_all();"
+
+          # Appliquer les migrations
+          npx prisma migrate deploy
+
+          # Exécuter le seed seulement si la table est vide (exemple avec "maTable")
+          npx prisma db execute --url $DATABASE_URL --sql "DO \$\$ BEGIN IF (SELECT count(*) FROM \"maTable\") = 0 THEN PERFORM 1; END IF; END \$\$;"
+          
+          # Lancer le seed (vérification intégrée dans seed.js)
+          node lib/seed.js
 
       # 6. Build Next.js
       - run: npm run vercel-build
