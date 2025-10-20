@@ -1,0 +1,40 @@
+name: Deploy Next.js + Prisma
+
+on:
+  push:
+    branches:
+      - main  # ou ta branche principale
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Récupérer le code
+      - uses: actions/checkout@v3
+
+      # 2. Installer Node.js
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # 3. Installer les dépendances
+      - run: npm install
+
+      # 4. Générer Prisma
+      - run: npx prisma generate
+
+      # 5. Appliquer migrations + seed
+      - name: Apply migrations and seed
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: npm run db:deploy
+
+      # 6. Build Next.js
+      - run: npm run vercel-build
+
+      # 7. Déployer sur Vercel
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: vercel --prod --confirm
